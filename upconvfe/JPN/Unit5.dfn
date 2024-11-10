@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file original="C:\msys64\home\tsuyoshi\upconv\upconvfe_080\Unit5.dfm" source-language="ja-JP" target-language="ja-JP" datatype="delphiform" tool="ETM v10.0" ts="C:\msys64\home\tsuyoshi\upconv\upconvfe_080\Unit5.dfm">
+    <header>
+      <prop-group name="ITEHeaderProp">
+        <prop prop-type="Version">9.0</prop>
+        <prop prop-type="SelfDateTime">43773.2033796296</prop>
+        <prop prop-type="OrigDateTime">43772.6922222222</prop>
+        <prop prop-type="XlatDateTime">43772.6922222222</prop>
+        <prop prop-type="Translated">1</prop>
+        <prop prop-type="UnTranslated">31</prop>
+      </prop-group>
+    </header>
+    <body>
+      <trans-unit id="O:Form5.Left" resname="O:Form5.Left">
+        <source>0</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632176</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">0</prop>
+          <prop prop-type="Type">TForm5</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.Top" resname="O:Form5.Top">
+        <source>0</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632176</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">1</prop>
+          <prop prop-type="Type">TForm5</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.Caption" resname="O:Form5.Caption">
+        <source>'WAV Information'</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632176</prop>
+          <prop prop-type="Status">1</prop>
+          <prop prop-type="Order">2</prop>
+          <prop prop-type="Type">TForm5</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+        <target>'WAV 情報'</target>
+      </trans-unit>
+      <trans-unit id="O:Form5.ClientHeight" resname="O:Form5.ClientHeight">
+        <source>372</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632176</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">3</prop>
+          <prop prop-type="Type">TForm5</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.ClientWidth" resname="O:Form5.ClientWidth">
+        <source>505</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632176</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">4</prop>
+          <prop prop-type="Type">TForm5</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.Color" resname="O:Form5.Color">
+        <source>clBtnFace</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632176</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">5</prop>
+          <prop prop-type="Type">TForm5</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.Font.Charset" resname="O:Form5.Font.Charset">
+        <source>DEFAULT_CHARSET</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632176</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">6</prop>
+          <prop prop-type="Type">TForm5</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.Font.Color" resname="O:Form5.Font.Color">
+        <source>clWindowText</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632292</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">7</prop>
+          <prop prop-type="Type">TForm5</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.Font.Height" resname="O:Form5.Font.Height">
+        <source>-11</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632292</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">8</prop>
+          <prop prop-type="Type">TForm5</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.Font.Name" resname="O:Form5.Font.Name">
+        <source>'Tahoma'</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632292</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">9</prop>
+          <prop prop-type="Type">TForm5</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.Font.Style" resname="O:Form5.Font.Style">
+        <source>[]</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632292</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">10</prop>
+          <prop prop-type="Type">TForm5</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.OldCreateOrder" resname="O:Form5.OldCreateOrder">
+        <source>False</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632292</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">11</prop>
+          <prop prop-type="Type">TForm5</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.OnShow" resname="O:Form5.OnShow">
+        <source>FormShow</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632292</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">12</prop>
+          <prop prop-type="Type">TForm5</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.PixelsPerInch" resname="O:Form5.PixelsPerInch">
+        <source>96</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632292</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">13</prop>
+          <prop prop-type="Type">TForm5</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.TextHeight" resname="O:Form5.TextHeight">
+        <source>13</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632292</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">14</prop>
+          <prop prop-type="Type">TForm5</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.O:tvTree.Left" resname="O:Form5.O:tvTree.Left">
+        <source>0</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632292</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">15</prop>
+          <prop prop-type="Type">TTreeView</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.O:tvTree.Top" resname="O:Form5.O:tvTree.Top">
+        <source>0</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632292</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">16</prop>
+          <prop prop-type="Type">TTreeView</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.O:tvTree.Width" resname="O:Form5.O:tvTree.Width">
+        <source>201</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632292</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">17</prop>
+          <prop prop-type="Type">TTreeView</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.O:tvTree.Height" resname="O:Form5.O:tvTree.Height">
+        <source>372</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632292</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">18</prop>
+          <prop prop-type="Type">TTreeView</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.O:tvTree.Align" resname="O:Form5.O:tvTree.Align">
+        <source>alLeft</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632292</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">19</prop>
+          <prop prop-type="Type">TTreeView</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.O:tvTree.Indent" resname="O:Form5.O:tvTree.Indent">
+        <source>19</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632407</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">20</prop>
+          <prop prop-type="Type">TTreeView</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.O:tvTree.TabOrder" resname="O:Form5.O:tvTree.TabOrder">
+        <source>0</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632407</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">21</prop>
+          <prop prop-type="Type">TTreeView</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.O:tvTree.OnClick" resname="O:Form5.O:tvTree.OnClick">
+        <source>tvTreeClick</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632407</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">22</prop>
+          <prop prop-type="Type">TTreeView</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.O:tvDesc.Left" resname="O:Form5.O:tvDesc.Left">
+        <source>199</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632407</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">23</prop>
+          <prop prop-type="Type">TValueListEditor</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.O:tvDesc.Top" resname="O:Form5.O:tvDesc.Top">
+        <source>0</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632407</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">24</prop>
+          <prop prop-type="Type">TValueListEditor</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.O:tvDesc.Width" resname="O:Form5.O:tvDesc.Width">
+        <source>306</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632407</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">25</prop>
+          <prop prop-type="Type">TValueListEditor</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.O:tvDesc.Height" resname="O:Form5.O:tvDesc.Height">
+        <source>372</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632407</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">26</prop>
+          <prop prop-type="Type">TValueListEditor</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.O:tvDesc.Align" resname="O:Form5.O:tvDesc.Align">
+        <source>alRight</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632407</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">27</prop>
+          <prop prop-type="Type">TValueListEditor</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.O:tvDesc.Anchors" resname="O:Form5.O:tvDesc.Anchors">
+        <source>[akLeft, akTop, akRight, akBottom]</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632407</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">28</prop>
+          <prop prop-type="Type">TValueListEditor</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.O:tvDesc.Strings.Strings[0]" resname="O:Form5.O:tvDesc.Strings.Strings[0]">
+        <source>'Offset=-'</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632407</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">29</prop>
+          <prop prop-type="Type">TValueListEditor</prop>
+          <prop prop-type="Localize">1</prop>
+          <prop prop-type="Open">(</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.O:tvDesc.Strings.Strings[1]" resname="O:Form5.O:tvDesc.Strings.Strings[1]">
+        <source>'Size=-'</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632407</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">30</prop>
+          <prop prop-type="Type">TValueListEditor</prop>
+          <prop prop-type="Localize">1</prop>
+          <prop prop-type="Close">)</prop>
+        </prop-group>
+      </trans-unit>
+      <trans-unit id="O:Form5.O:tvDesc.TabOrder" resname="O:Form5.O:tvDesc.TabOrder">
+        <source>1</source>
+        <prop-group name="ITEFieldProp">
+          <prop prop-type="Created">43773.1832632407</prop>
+          <prop prop-type="Status">0</prop>
+          <prop prop-type="Order">31</prop>
+          <prop prop-type="Type">TValueListEditor</prop>
+          <prop prop-type="Localize">1</prop>
+        </prop-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

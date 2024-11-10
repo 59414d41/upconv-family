@@ -1,0 +1,6 @@
+-abe -post_abe -hfc_auto -oversamp:1 -enable_hfc:0 -enable_lfc:0 -hfc:16000 -enable_nr:1 -nr:1600 -nr_option:1 -output_dither:2 -output_dither_option:0 -abe_option:0,1,0 -abe_ad_filter:0 -abe_version:2 -abe_declip:0 -abe_declick:0 -deE:0 -hfc_auto_adjust:2 -hfa_preset:1 -hfa3_option:2 -hfa_filter:6,3,5,5 -MC_Option:0,0,0,1 -ovwrite_s:4 -ovwrite_w:0 -enable_ovwrite_sw:0 -ovwrite_hfa:0 -enable_ovwrite_hfa:0 -ovwrite_norm:0 -enable_ovwrite_norm:0 -enable_suffix:0 -suffix:upconv
+
+-s -f --best
+-hh -q
+-V 0 -b 256
+Upconv 0.8.x Parameter 04 (OverSampling x2, ABE HFA3 Ver 0.8.x)

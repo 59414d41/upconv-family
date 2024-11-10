@@ -1,0 +1,4 @@
+lame(mp3)    96k|lame.exe|mp3|-V 0 -b 96
+lame(mp3)   128k|lame.exe|mp3|-V 0 -b 128
+lame(mp3)   192k|lame.exe|mp3|-V 0 -b 192
+lame(mp3)   256k|lame.exe|mp3|-V 0 -b 256

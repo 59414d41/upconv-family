@@ -1,0 +1,6 @@
+-abe -post_abe -oversamp:1 -enable_hfc:1 -enable_lfc:1 -hfc:15000 -enable_nr:1 -nr:1600 -nr_option:1 -output_dither:2 -output_dither_option:2 -abe_option:1,1,1 -abe_ad_filter:0 -abe_version:2 -abe_declip:0 -abe_declick:0 -abe_clld_level:3 -deE:0 -hfc_auto_adjust:4 -vla:0 -hfa_preset:9 -hfa3_option:2 -hfa_filter:6,4,6,6 -hfa3_analysis_limit_adjust:-4 -MC_Option:0,0,0,1 -ovwrite_s:6 -ovwrite_w:1 -enable_ovwrite_sw:0 -ovwrite_hfa:3 -enable_ovwrite_hfa:0 -ovwrite_norm:0 -enable_ovwrite_norm:0 -enable_suffix:1 -suffix:upconv082
+
+-s -f --best
+-hh -q
+-V 0 -b 256
+Upconv 0.8.x HFA3 Analisys Limit Adjust(-4)
