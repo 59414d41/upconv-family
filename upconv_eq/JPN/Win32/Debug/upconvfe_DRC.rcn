@@ -1,0 +1,2103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file original="C:\Users\tsuyoshi\AppData\Local\Temp\540A.tmp" source-language="ja-JP" target-language="ja-JP" datatype="cpp" tool="ETM v10.0" ts="C:\Users\tsuyoshi\AppData\Local\Temp\540A.tmp">
+    <header>
+      <prop-group name="ITEHeaderProp">
+        <prop prop-type="Version">9.0</prop>
+        <prop prop-type="SelfDateTime">43773.1832638889</prop>
+        <prop prop-type="OrigDateTime">43773.1832638889</prop>
+        <prop prop-type="XlatDateTime">43773.1832638889</prop>
+        <prop prop-type="Translated">6</prop>
+        <prop prop-type="UnTranslated">411</prop>
+      </prop-group>
+    </header>
+    <body>
+      <trans-unit id="Vcl_Comstrs_sFailsetCalSelRange" resname="Vcl_Comstrs_sFailsetCalSelRange">
+        <source>"カレンダーの範囲選択ができません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634722</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sInvalidLevelEx" resname="Vcl_Comstrs_sInvalidLevelEx">
+        <source>"項目 \"%s\" のレベル (%d) が無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634722</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sInvalidIndex" resname="Vcl_Comstrs_sInvalidIndex">
+        <source>"不正なインデックス"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634722</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sInsertError" resname="Vcl_Comstrs_sInsertError">
+        <source>"項目の挿入ができません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634722</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sInvalidOwner" resname="Vcl_Comstrs_sInvalidOwner">
+        <source>"オーナーが無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634722</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sRichEditInsertError" resname="Vcl_Comstrs_sRichEditInsertError">
+        <source>"RichEdit での行の挿入エラー"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634722</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sRichEditLoadFail" resname="Vcl_Comstrs_sRichEditLoadFail">
+        <source>"ストリームからの読み込みに失敗しました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634722</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sRichEditSaveFail" resname="Vcl_Comstrs_sRichEditSaveFail">
+        <source>"ストリームへの書き込みに失敗しました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634722</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sUDAssociated" resname="Vcl_Comstrs_sUDAssociated">
+        <source>"%s は既に %s に関連付けられています"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634722</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sPageIndexError" resname="Vcl_Comstrs_sPageIndexError">
+        <source>"%d は PageIndex 値として無効です。PageIndex は 0 から %d まででなければなりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634838</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sInvalidComCtl32" resname="Vcl_Comstrs_sInvalidComCtl32">
+        <source>"このコントロールはバージョンが 4.70 以降の COMCTL32.DLL を必要とします。"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634838</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sDateTimeMax" resname="Vcl_Comstrs_sDateTimeMax">
+        <source>"日付の最大値 (%s) を越えています。"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634838</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sDateTimeMin" resname="Vcl_Comstrs_sDateTimeMin">
+        <source>"日付の最小値 (%s) を越えています。"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634838</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sNeedAllowNone" resname="Vcl_Comstrs_sNeedAllowNone">
+        <source>"この日付を設定するには ShowCheckbox モードになっている必要があります"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634838</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sFailSetCalDateTime" resname="Vcl_Comstrs_sFailSetCalDateTime">
+        <source>"カレンダーに日付または時刻を設定できません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634838</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sFailSetCalMaxSelRange" resname="Vcl_Comstrs_sFailSetCalMaxSelRange">
+        <source>"範囲選択の最大値を設定できませんでした"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634838</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sFailSetCalMinMaxRange" resname="Vcl_Comstrs_sFailSetCalMinMaxRange">
+        <source>"カレンダーに最大/最小値を設定できませんでした。"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634838</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SStyleHookClassRegistered" resname="Vcl_Consts_SStyleHookClassRegistered">
+        <source>"クラス '%s' は既に '%s' 用に登録されています"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634838</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SStyleHookClassNotRegistered" resname="Vcl_Consts_SStyleHookClassNotRegistered">
+        <source>"クラス '%s' は '%s' 用に登録されていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634838</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SStyleInvalidParameter" resname="Vcl_Consts_SStyleInvalidParameter">
+        <source>"%s パラメータは nil にできません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634838</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SStyleHookClassNotFound" resname="Vcl_Consts_SStyleHookClassNotFound">
+        <source>"StyleHook クラスが %s 用に登録されていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634838</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SStyleFeatureNotSupported" resname="Vcl_Consts_SStyleFeatureNotSupported">
+        <source>"このスタイルでサポートされていない機能です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634954</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SStyleNotRegistered" resname="Vcl_Consts_SStyleNotRegistered">
+        <source>"スタイル '%s' は登録されていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634954</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SStyleUnregisterError" resname="Vcl_Consts_SStyleUnregisterError">
+        <source>"システム スタイルは登録解除できません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634954</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SStyleNotRegisteredNoName" resname="Vcl_Consts_SStyleNotRegisteredNoName">
+        <source>"スタイルが登録されていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634954</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sTabFailClear" resname="Vcl_Comstrs_sTabFailClear">
+        <source>"タブの全削除に失敗しました。"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634954</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sTabFailDelete" resname="Vcl_Comstrs_sTabFailDelete">
+        <source>"インデックスが %d のタブを削除できませんでした"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634954</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sTabFailRetrieve" resname="Vcl_Comstrs_sTabFailRetrieve">
+        <source>"%d 番目のタブの参照に失敗しました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634954</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sTabFailGetObject" resname="Vcl_Comstrs_sTabFailGetObject">
+        <source>"%d 番目のタブのオブジェクトの取得に失敗しました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634954</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sTabFailSet" resname="Vcl_Comstrs_sTabFailSet">
+        <source>"%1:d 番目のタブに \"%0:s\"を設定できませんでした"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634954</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sTabFailSetObject" resname="Vcl_Comstrs_sTabFailSetObject">
+        <source>"%d 番目のタブにオブジェクトを設定することができませんでした"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634954</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sTabMustBeMultiLine" resname="Vcl_Comstrs_sTabMustBeMultiLine">
+        <source>"TabPosition が tpLeft または tpRight の場合には MultiLine が True でなければなりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634954</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Comstrs_sInvalidLevel" resname="Vcl_Comstrs_sInvalidLevel">
+        <source>"項目レベルの割り当てが無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832634954</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SPageControlNotSet" resname="Vcl_Consts_SPageControlNotSet">
+        <source>"最初に PageControl を割り当ててください"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635069</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SWindowsVistaRequired" resname="Vcl_Consts_SWindowsVistaRequired">
+        <source>"%s は、Windows Vista 以降が必要です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635069</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_STaskDlgButtonCaption" resname="Vcl_Consts_STaskDlgButtonCaption">
+        <source>"Button%d"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635069</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_STaskDlgRadioButtonCaption" resname="Vcl_Consts_STaskDlgRadioButtonCaption">
+        <source>"RadioButton%d"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635069</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidTaskDlgButtonCaption" resname="Vcl_Consts_SInvalidTaskDlgButtonCaption">
+        <source>"Caption は空白にはできません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635069</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidCategoryPanelParent" resname="Vcl_Consts_SInvalidCategoryPanelParent">
+        <source>"CategoryPanel は CategoryPanelGroup を親に持つ必要があります"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635069</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidCategoryPanelGroupChild" resname="Vcl_Consts_SInvalidCategoryPanelGroupChild">
+        <source>"CategoryPanels のみを CategoryPanelGroup に挿入できます"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635069</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SStyleLoadError" resname="Vcl_Consts_SStyleLoadError">
+        <source>"スタイル '%s' を読み込めません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635069</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SStyleLoadErrors" resname="Vcl_Consts_SStyleLoadErrors">
+        <source>"スタイルを読み込めません: %s"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635069</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SStyleRegisterError" resname="Vcl_Consts_SStyleRegisterError">
+        <source>"スタイル '%s' は既に登録されています"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635069</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SStyleClassRegisterError" resname="Vcl_Consts_SStyleClassRegisterError">
+        <source>"スタイル クラス '%s' は既に登録されています"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635069</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SStyleNotFound" resname="Vcl_Consts_SStyleNotFound">
+        <source>"スタイル '%s' が見つかりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635069</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SStyleClassNotFound" resname="Vcl_Consts_SStyleClassNotFound">
+        <source>"スタイル クラス '%s' が見つかりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635185</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SStyleInvalidHandle" resname="Vcl_Consts_SStyleInvalidHandle">
+        <source>"スタイルのハンドルが無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635185</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SStyleFormatError" resname="Vcl_Consts_SStyleFormatError">
+        <source>"スタイルの形式が無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635185</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SStyleFileDescription" resname="Vcl_Consts_SStyleFileDescription">
+        <source>"VCL スタイル ファイル"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635185</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SUsername" resname="Vcl_Consts_SUsername">
+        <source>"ユーザー名(&amp;U)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635185</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SPassword" resname="Vcl_Consts_SPassword">
+        <source>"パスワード(&amp;P)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635185</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SDomain" resname="Vcl_Consts_SDomain">
+        <source>"ドメイン(&amp;D)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635185</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SLogin" resname="Vcl_Consts_SLogin">
+        <source>"ログイン"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635185</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SKeyCaption" resname="Vcl_Consts_SKeyCaption">
+        <source>"キー"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635185</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SValueCaption" resname="Vcl_Consts_SValueCaption">
+        <source>"値"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635185</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SKeyConflict" resname="Vcl_Consts_SKeyConflict">
+        <source>"キー名 \"%s\" はすでに存在します"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635185</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SKeyNotFound" resname="Vcl_Consts_SKeyNotFound">
+        <source>"キー \"%s\" が見つかりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635185</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SNoColumnMoving" resname="Vcl_Consts_SNoColumnMoving">
+        <source>"goColMoving はサポートされていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635301</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SNoEqualsInKey" resname="Vcl_Consts_SNoEqualsInKey">
+        <source>"キーは等号記号（“=”）を含めません。"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635301</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SSeparator" resname="Vcl_Consts_SSeparator">
+        <source>"セパレータ"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635301</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SErrorSettingCount" resname="Vcl_Consts_SErrorSettingCount">
+        <source>"%s.Count の値を設定しようとしてエラーが起きました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635301</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SListBoxMustBeVirtual" resname="Vcl_Consts_SListBoxMustBeVirtual">
+        <source>"リストボックス (%s) の Count を設定するには Virtual スタイルでなければなりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635301</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SNoGetItemEventHandler" resname="Vcl_Consts_SNoGetItemEventHandler">
+        <source>"OnGetItem イベントハンドラが指定されていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635301</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidPath" resname="Vcl_Consts_SInvalidPath">
+        <source>"\"%s\" は無効なパスです"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635301</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_STrayIconRemoveError" resname="Vcl_Consts_STrayIconRemoveError">
+        <source>"シェル通知アイコンが削除できません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635301</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInsertLineError" resname="Vcl_Consts_SInsertLineError">
+        <source>"行を挿入できません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635301</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidClipFmt" resname="Vcl_Consts_SInvalidClipFmt">
+        <source>"クリップボード形式が無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635301</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SIconToClipboard" resname="Vcl_Consts_SIconToClipboard">
+        <source>"クリップボードはアイコンをサポートしていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635301</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SCannotOpenClipboard" resname="Vcl_Consts_SCannotOpenClipboard">
+        <source>"クリップボード %s を開けません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635417</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidMemoSize" resname="Vcl_Consts_SInvalidMemoSize">
+        <source>"テキストがメモの容量を超えています"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635417</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidPrinterOp" resname="Vcl_Consts_SInvalidPrinterOp">
+        <source>"選択したプリンタで操作がサポートされていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635417</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SNoDefaultPrinter" resname="Vcl_Consts_SNoDefaultPrinter">
+        <source>"デフォルトのプリンタが現在選択されていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635417</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SDuplicateMenus" resname="Vcl_Consts_SDuplicateMenus">
+        <source>"メニュー '%s' は別のフォームで既に使われています"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635417</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SDockedCtlNeedsName" resname="Vcl_Consts_SDockedCtlNeedsName">
+        <source>"ドッキングコントロールは名前を持っていなければなりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635417</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SDockTreeRemoveError" resname="Vcl_Consts_SDockTreeRemoveError">
+        <source>"ドッキングツリーからコントロールを削除する際のエラー "</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635417</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SDockZoneNotFound" resname="Vcl_Consts_SDockZoneNotFound">
+        <source>"- ドッキングゾーンが見つかりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635417</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SDockZoneHasNoCtl" resname="Vcl_Consts_SDockZoneHasNoCtl">
+        <source>"- ドッキングゾーンはコントロールを持ちません。"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635417</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SDockZoneVersionConflict" resname="Vcl_Consts_SDockZoneVersionConflict">
+        <source>"ストリームからドックゾーンの読み取りエラー。バージョン %d が必要ですが %d が見つかりました。 "</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635417</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMultiSelectRequired" resname="Vcl_Consts_SMultiSelectRequired">
+        <source>"この機能を使うには Multiselect モードが必要です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635417</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SPromptArrayTooShort" resname="Vcl_Consts_SPromptArrayTooShort">
+        <source>"値配列の長さ &gt;= プロンプト配列の長さでなければなりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635532</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SPromptArrayEmpty" resname="Vcl_Consts_SPromptArrayEmpty">
+        <source>"プロンプト配列が空であってはなりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635532</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcSpace" resname="Vcl_Consts_SmkcSpace">
+        <source>"Space"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635532</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcPgUp" resname="Vcl_Consts_SmkcPgUp">
+        <source>"PgUp"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635532</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcPgDn" resname="Vcl_Consts_SmkcPgDn">
+        <source>"PgDn"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635532</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcEnd" resname="Vcl_Consts_SmkcEnd">
+        <source>"End"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635532</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcHome" resname="Vcl_Consts_SmkcHome">
+        <source>"Home"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635532</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcLeft" resname="Vcl_Consts_SmkcLeft">
+        <source>"Left"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635532</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcUp" resname="Vcl_Consts_SmkcUp">
+        <source>"Up"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635532</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcRight" resname="Vcl_Consts_SmkcRight">
+        <source>"Right"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635532</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcDown" resname="Vcl_Consts_SmkcDown">
+        <source>"Down"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635532</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcIns" resname="Vcl_Consts_SmkcIns">
+        <source>"Ins"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635648</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcDel" resname="Vcl_Consts_SmkcDel">
+        <source>"Del"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635648</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcShift" resname="Vcl_Consts_SmkcShift">
+        <source>"Shift+"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635648</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcCtrl" resname="Vcl_Consts_SmkcCtrl">
+        <source>"Ctrl+"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635648</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcAlt" resname="Vcl_Consts_SmkcAlt">
+        <source>"Alt+"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635648</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SOutOfRange" resname="Vcl_Consts_SOutOfRange">
+        <source>"値は %d から %d までの間でなければなりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635648</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_sAllFilter" resname="Vcl_Consts_sAllFilter">
+        <source>"すべて"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635648</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMsgDlgYes" resname="Vcl_Consts_SMsgDlgYes">
+        <source>"はい(&amp;Y)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635648</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMsgDlgNo" resname="Vcl_Consts_SMsgDlgNo">
+        <source>"いいえ(&amp;N)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635648</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMsgDlgOK" resname="Vcl_Consts_SMsgDlgOK">
+        <source>"OK"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635648</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMsgDlgCancel" resname="Vcl_Consts_SMsgDlgCancel">
+        <source>"キャンセル"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635648</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMsgDlgHelp" resname="Vcl_Consts_SMsgDlgHelp">
+        <source>"ヘルプ(&amp;H)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635764</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMsgDlgAbort" resname="Vcl_Consts_SMsgDlgAbort">
+        <source>"中止(&amp;A)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635764</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMsgDlgRetry" resname="Vcl_Consts_SMsgDlgRetry">
+        <source>"再試行(&amp;R)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635764</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMsgDlgIgnore" resname="Vcl_Consts_SMsgDlgIgnore">
+        <source>"無視(&amp;I)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635764</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMsgDlgAll" resname="Vcl_Consts_SMsgDlgAll">
+        <source>"すべて(&amp;A)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635764</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMsgDlgNoToAll" resname="Vcl_Consts_SMsgDlgNoToAll">
+        <source>"すべていいえ(&amp;O)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635764</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMsgDlgYesToAll" resname="Vcl_Consts_SMsgDlgYesToAll">
+        <source>"すべてはい(&amp;A)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635764</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMsgDlgClose" resname="Vcl_Consts_SMsgDlgClose">
+        <source>"閉じる(&amp;C)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635764</prop><prop prop-type="Status">2</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcBkSp" resname="Vcl_Consts_SmkcBkSp">
+        <source>"BkSp"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635764</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcTab" resname="Vcl_Consts_SmkcTab">
+        <source>"Tab"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263588</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcEsc" resname="Vcl_Consts_SmkcEsc">
+        <source>"Esc"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263588</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SmkcEnter" resname="Vcl_Consts_SmkcEnter">
+        <source>"Enter"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263588</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SVEnhMetafiles" resname="Vcl_Consts_SVEnhMetafiles">
+        <source>"エンハンス メタファイル"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263588</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SVIcons" resname="Vcl_Consts_SVIcons">
+        <source>"アイコン"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263588</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SVBitmaps" resname="Vcl_Consts_SVBitmaps">
+        <source>"ビットマップ"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263588</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SVTIFFImages" resname="Vcl_Consts_SVTIFFImages">
+        <source>"TIFF 画像"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263588</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SGridTooLarge" resname="Vcl_Consts_SGridTooLarge">
+        <source>"グリッドが大きすぎます"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263588</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_STooManyDeleted" resname="Vcl_Consts_STooManyDeleted">
+        <source>"削除する行または列が多すぎます"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263588</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SIndexOutOfRange" resname="Vcl_Consts_SIndexOutOfRange">
+        <source>"グリッドインデックス が範囲を超えています"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263588</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SFixedColTooBig" resname="Vcl_Consts_SFixedColTooBig">
+        <source>"固定列の数は列数より小さくなければなりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635995</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SFixedRowTooBig" resname="Vcl_Consts_SFixedRowTooBig">
+        <source>"固定行の数は行数より小さくなければなりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635995</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidStringGridOp" resname="Vcl_Consts_SInvalidStringGridOp">
+        <source>"グリッドの行を追加/削除することはできません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635995</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMaskErr" resname="Vcl_Consts_SMaskErr">
+        <source>"入力値が無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635995</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMaskEditErr" resname="Vcl_Consts_SMaskEditErr">
+        <source>"入力値が無効です。エスケープ キーで変更を取り消せます"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635995</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMsgDlgWarning" resname="Vcl_Consts_SMsgDlgWarning">
+        <source>"警告"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635995</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMsgDlgError" resname="Vcl_Consts_SMsgDlgError">
+        <source>"エラー"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635995</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMsgDlgInformation" resname="Vcl_Consts_SMsgDlgInformation">
+        <source>"情報"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832635995</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMsgDlgConfirm" resname="Vcl_Consts_SMsgDlgConfirm">
+        <source>"確認"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636111</prop><prop prop-type="Status">2</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SGroupIndexTooLow" resname="Vcl_Consts_SGroupIndexTooLow">
+        <source>"GroupIndex は前のメニュー項目の GroupIndex 以上でなければなりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636111</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SNoMDIForm" resname="Vcl_Consts_SNoMDIForm">
+        <source>"フォームを作成できません。現在アクティブな MDI フォームはありません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636111</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SImageCanvasNeedsBitmap" resname="Vcl_Consts_SImageCanvasNeedsBitmap">
+        <source>"変更できるのはビットマップを含む画像のみです"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636111</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SControlParentSetToSelf" resname="Vcl_Consts_SControlParentSetToSelf">
+        <source>"コントロールの親をそのコントロール自体にはできません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636111</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SOKButton" resname="Vcl_Consts_SOKButton">
+        <source>"OK"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636111</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SCancelButton" resname="Vcl_Consts_SCancelButton">
+        <source>"キャンセル"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636111</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SYesButton" resname="Vcl_Consts_SYesButton">
+        <source>"はい(&amp;Y)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636111</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SNoButton" resname="Vcl_Consts_SNoButton">
+        <source>"いいえ(&amp;N)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636111</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SHelpButton" resname="Vcl_Consts_SHelpButton">
+        <source>"ヘルプ(&amp;H)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636227</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SCloseButton" resname="Vcl_Consts_SCloseButton">
+        <source>"閉じる(&amp;C)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636227</prop><prop prop-type="Status">2</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SIgnoreButton" resname="Vcl_Consts_SIgnoreButton">
+        <source>"無視(&amp;I)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636227</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SRetryButton" resname="Vcl_Consts_SRetryButton">
+        <source>"再試行(&amp;R)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636227</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SAbortButton" resname="Vcl_Consts_SAbortButton">
+        <source>"中止"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636227</prop><prop prop-type="Status">2</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SAllButton" resname="Vcl_Consts_SAllButton">
+        <source>"すべて(&amp;A)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636227</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SCannotDragForm" resname="Vcl_Consts_SCannotDragForm">
+        <source>"フォームはドラッグできません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636227</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SVMetafiles" resname="Vcl_Consts_SVMetafiles">
+        <source>"メタファイル"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636227</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SParentRequired" resname="Vcl_Consts_SParentRequired">
+        <source>"コントロール '%s' は親ウィンドウを持っていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636227</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SParentGivenNotAParent" resname="Vcl_Consts_SParentGivenNotAParent">
+        <source>"指定した親は '%s' の親ではありません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636343</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMDIChildNotVisible" resname="Vcl_Consts_SMDIChildNotVisible">
+        <source>"MDI 子フォームは非表示にできません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636343</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SVisibleChanged" resname="Vcl_Consts_SVisibleChanged">
+        <source>"OnShow や OnHide では Visible を変更できません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636343</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SCannotShowModal" resname="Vcl_Consts_SCannotShowModal">
+        <source>"表示中のウィンドウをモーダルにできません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636343</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SScrollBarRange" resname="Vcl_Consts_SScrollBarRange">
+        <source>"スクロールバーのプロパティが範囲外です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636343</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SPropertyOutOfRange" resname="Vcl_Consts_SPropertyOutOfRange">
+        <source>"プロパティ %s が範囲外です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636343</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMenuIndexError" resname="Vcl_Consts_SMenuIndexError">
+        <source>"メニュー インデックスが範囲外です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636343</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMenuReinserted" resname="Vcl_Consts_SMenuReinserted">
+        <source>"メニューが 2 回挿入されました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636343</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SMenuNotFound" resname="Vcl_Consts_SMenuNotFound">
+        <source>"メニューに含まれないサブメニューです"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636343</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SNoTimers" resname="Vcl_Consts_SNoTimers">
+        <source>"タイマーを取得できません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636343</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SNotPrinting" resname="Vcl_Consts_SNotPrinting">
+        <source>"プリンタは現在印刷を行っていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636343</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SPrinting" resname="Vcl_Consts_SPrinting">
+        <source>"印刷実行中です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636343</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SPrinterIndexError" resname="Vcl_Consts_SPrinterIndexError">
+        <source>"プリンタ インデックスが範囲外です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636458</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidPrinter" resname="Vcl_Consts_SInvalidPrinter">
+        <source>"選択したプリンタが無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636458</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SDeviceOnPort" resname="Vcl_Consts_SDeviceOnPort">
+        <source>"%s (ポート %s)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636458</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SChangeIconSize" resname="Vcl_Consts_SChangeIconSize">
+        <source>"アイコンのサイズを変更できません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636458</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SChangeWicSize" resname="Vcl_Consts_SChangeWicSize">
+        <source>"WIC 対応イメージのサイズは変更できません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636458</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SUnknownExtension" resname="Vcl_Consts_SUnknownExtension">
+        <source>"画像のファイル拡張子 (.%s) が不明です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636458</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SUnknownClipboardFormat" resname="Vcl_Consts_SUnknownClipboardFormat">
+        <source>"サポートされていないクリップボード形式です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636458</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SOutOfResources" resname="Vcl_Consts_SOutOfResources">
+        <source>"システム リソース不足です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636458</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SNoCanvasHandle" resname="Vcl_Consts_SNoCanvasHandle">
+        <source>"キャンバスには描画できません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636458</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidTextFormatFlag" resname="Vcl_Consts_SInvalidTextFormatFlag">
+        <source>"テキスト書式設定フラグ '%s' はサポートされていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636458</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidImageSize" resname="Vcl_Consts_SInvalidImageSize">
+        <source>"画像サイズが無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636458</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidImageList" resname="Vcl_Consts_SInvalidImageList">
+        <source>"イメージリストが無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636458</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SReplaceImage" resname="Vcl_Consts_SReplaceImage">
+        <source>"画像を置き換えられません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636574</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SImageIndexError" resname="Vcl_Consts_SImageIndexError">
+        <source>"画像リストのインデックスが無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636574</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SImageReadFail" resname="Vcl_Consts_SImageReadFail">
+        <source>"ストリームからの ImageList データの読み取りに失敗しました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636574</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SImageWriteFail" resname="Vcl_Consts_SImageWriteFail">
+        <source>"ストリームへの ImageList データの書き込みに失敗しました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636574</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SWindowDCError" resname="Vcl_Consts_SWindowDCError">
+        <source>"デバイスコンテキストの作成に失敗しました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636574</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SWindowClass" resname="Vcl_Consts_SWindowClass">
+        <source>"ウィンドウクラスの作成でエラーが発生しました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636574</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SCannotFocus" resname="Vcl_Consts_SCannotFocus">
+        <source>"無効/非表示ウィンドウにはフォーカスを設定できません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636574</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidSourceArray" resname="System_Sysconst_SInvalidSourceArray">
+        <source>"ソース配列が無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636574</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidDestinationArray" resname="System_Sysconst_SInvalidDestinationArray">
+        <source>"ターゲット配列が無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636574</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SCharIndexOutOfBounds" resname="System_Sysconst_SCharIndexOutOfBounds">
+        <source>"文字インデックスが範囲外です (%d)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263669</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SByteIndexOutOfBounds" resname="System_Sysconst_SByteIndexOutOfBounds">
+        <source>"開始インデックスが範囲外です (%d)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263669</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidCharCount" resname="System_Sysconst_SInvalidCharCount">
+        <source>"カウントが無効です (%d)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263669</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidDestinationIndex" resname="System_Sysconst_SInvalidDestinationIndex">
+        <source>"ターゲット インデックスが無効です (%d)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263669</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidCodePage" resname="System_Sysconst_SInvalidCodePage">
+        <source>"コード ページが無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263669</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidEncodingName" resname="System_Sysconst_SInvalidEncodingName">
+        <source>"エンコード名が無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263669</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidTabPosition" resname="Vcl_Consts_SInvalidTabPosition">
+        <source>"現在のタブ スタイルと互換性のないタブ位置です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263669</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidTabStyle" resname="Vcl_Consts_SInvalidTabStyle">
+        <source>"現在のタブ位置と互換性のないタブ スタイルです"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263669</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidBitmap" resname="Vcl_Consts_SInvalidBitmap">
+        <source>"ビットマップ画像が無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263669</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidIcon" resname="Vcl_Consts_SInvalidIcon">
+        <source>"アイコン画像が無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263669</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidMetafile" resname="Vcl_Consts_SInvalidMetafile">
+        <source>"メタファイルが不正です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636806</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidPixelFormat" resname="Vcl_Consts_SInvalidPixelFormat">
+        <source>"ピクセル形式が無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636806</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SInvalidImage" resname="Vcl_Consts_SInvalidImage">
+        <source>"画像が不正です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636806</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="Vcl_Consts_SScanLine" resname="Vcl_Consts_SScanLine">
+        <source>"スキャン ライン インデックスが範囲外です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636806</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongMonthNameNov" resname="System_Sysconst_SLongMonthNameNov">
+        <source>"November"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636806</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongMonthNameDec" resname="System_Sysconst_SLongMonthNameDec">
+        <source>"December"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636806</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortDayNameSun" resname="System_Sysconst_SShortDayNameSun">
+        <source>"Sun"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636806</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortDayNameMon" resname="System_Sysconst_SShortDayNameMon">
+        <source>"Mon"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636806</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortDayNameTue" resname="System_Sysconst_SShortDayNameTue">
+        <source>"Tue"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636806</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortDayNameWed" resname="System_Sysconst_SShortDayNameWed">
+        <source>"Wed"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636921</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortDayNameThu" resname="System_Sysconst_SShortDayNameThu">
+        <source>"Thu"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636921</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortDayNameFri" resname="System_Sysconst_SShortDayNameFri">
+        <source>"Fri"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636921</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortDayNameSat" resname="System_Sysconst_SShortDayNameSat">
+        <source>"Sat"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636921</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongDayNameSun" resname="System_Sysconst_SLongDayNameSun">
+        <source>"Sunday"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636921</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongDayNameMon" resname="System_Sysconst_SLongDayNameMon">
+        <source>"Monday"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636921</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongDayNameTue" resname="System_Sysconst_SLongDayNameTue">
+        <source>"Tuesday"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636921</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongDayNameWed" resname="System_Sysconst_SLongDayNameWed">
+        <source>"Wednesday"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636921</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongDayNameThu" resname="System_Sysconst_SLongDayNameThu">
+        <source>"Thursday"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636921</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongDayNameFri" resname="System_Sysconst_SLongDayNameFri">
+        <source>"Friday"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832636921</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongDayNameSat" resname="System_Sysconst_SLongDayNameSat">
+        <source>"Saturday"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637037</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortMonthNameJul" resname="System_Sysconst_SShortMonthNameJul">
+        <source>"Jul"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637037</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortMonthNameAug" resname="System_Sysconst_SShortMonthNameAug">
+        <source>"Aug"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637037</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortMonthNameSep" resname="System_Sysconst_SShortMonthNameSep">
+        <source>"Sep"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637037</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortMonthNameOct" resname="System_Sysconst_SShortMonthNameOct">
+        <source>"Oct"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637037</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortMonthNameNov" resname="System_Sysconst_SShortMonthNameNov">
+        <source>"Nov"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637037</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortMonthNameDec" resname="System_Sysconst_SShortMonthNameDec">
+        <source>"Dec"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637037</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongMonthNameJan" resname="System_Sysconst_SLongMonthNameJan">
+        <source>"January"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637037</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongMonthNameFeb" resname="System_Sysconst_SLongMonthNameFeb">
+        <source>"February"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637037</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongMonthNameMar" resname="System_Sysconst_SLongMonthNameMar">
+        <source>"March"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637037</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongMonthNameApr" resname="System_Sysconst_SLongMonthNameApr">
+        <source>"April"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637153</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongMonthNameMay" resname="System_Sysconst_SLongMonthNameMay">
+        <source>"May"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637153</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongMonthNameJun" resname="System_Sysconst_SLongMonthNameJun">
+        <source>"June"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637153</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongMonthNameJul" resname="System_Sysconst_SLongMonthNameJul">
+        <source>"July"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637153</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongMonthNameAug" resname="System_Sysconst_SLongMonthNameAug">
+        <source>"August"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637153</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongMonthNameSep" resname="System_Sysconst_SLongMonthNameSep">
+        <source>"September"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637153</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SLongMonthNameOct" resname="System_Sysconst_SLongMonthNameOct">
+        <source>"October"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637153</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SSafecallException" resname="System_Sysconst_SSafecallException">
+        <source>"safecall メソッド内で例外が発生しました。"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637153</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SMonitorLockException" resname="System_Sysconst_SMonitorLockException">
+        <source>"オブジェクト ロックが所有されていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637153</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SNoMonitorSupportException" resname="System_Sysconst_SNoMonitorSupportException">
+        <source>"モニタ サポート関数が初期化されていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637153</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SNotImplemented" resname="System_Sysconst_SNotImplemented">
+        <source>"機能が実装されていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637269</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SObjectDisposed" resname="System_Sysconst_SObjectDisposed">
+        <source>"破棄されたオブジェクトに対してメソッドが呼び出されました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637269</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SAssertError" resname="System_Sysconst_SAssertError">
+        <source>"%s (%s, %d 行)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637269</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SAbstractError" resname="System_Sysconst_SAbstractError">
+        <source>"抽象エラー"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637269</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SModuleAccessViolation" resname="System_Sysconst_SModuleAccessViolation">
+        <source>"モジュール '%1:s' のアドレス %0:p でアドレス %3:p に対する%2:s違反がおきました。"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637269</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SOSError" resname="System_Sysconst_SOSError">
+        <source>"システム エラー。コード: %d。\r\n%s%s"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637269</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SUnkOSError" resname="System_Sysconst_SUnkOSError">
+        <source>"OS 機能呼び出しの失敗"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637269</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortMonthNameJan" resname="System_Sysconst_SShortMonthNameJan">
+        <source>"Jan"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637269</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortMonthNameFeb" resname="System_Sysconst_SShortMonthNameFeb">
+        <source>"Feb"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637269</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortMonthNameMar" resname="System_Sysconst_SShortMonthNameMar">
+        <source>"Mar"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637269</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortMonthNameApr" resname="System_Sysconst_SShortMonthNameApr">
+        <source>"Apr"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637384</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortMonthNameMay" resname="System_Sysconst_SShortMonthNameMay">
+        <source>"May"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637384</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SShortMonthNameJun" resname="System_Sysconst_SShortMonthNameJun">
+        <source>"Jun"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637384</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidVarNullOp" resname="System_Sysconst_SInvalidVarNullOp">
+        <source>"無効な NULL バリアント操作"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637384</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidVarOpWithHResultWithPrefix" resname="System_Sysconst_SInvalidVarOpWithHResultWithPrefix">
+        <source>"無効なバリアント操作 (%s%.8x)\n%s"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637384</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SVarTypeOutOfRangeWithPrefix" resname="System_Sysconst_SVarTypeOutOfRangeWithPrefix">
+        <source>"指定されたカスタムバリアント番号 (%s%.4x) は範囲を超えています"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637384</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SVarTypeAlreadyUsedWithPrefix" resname="System_Sysconst_SVarTypeAlreadyUsedWithPrefix">
+        <source>"指定されたカスタムバリアント番号 (%s%.4x) は既に %s が使っています"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637384</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SVarTypeNotUsableWithPrefix" resname="System_Sysconst_SVarTypeNotUsableWithPrefix">
+        <source>"指定されたカスタムバリアント番号 (%s%.4x) は使用不可能です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637384</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SVarTypeTooManyCustom" resname="System_Sysconst_SVarTypeTooManyCustom">
+        <source>"カスタムバリアントの登録数が多すぎます"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637384</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SVarTypeCouldNotConvert" resname="System_Sysconst_SVarTypeCouldNotConvert">
+        <source>"%0:s型から %1:s 型へのバリアント型変換はできません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.18326375</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SVarTypeConvertOverflow" resname="System_Sysconst_SVarTypeConvertOverflow">
+        <source>"%0:s 型から %1:s 型へのバリアント型変換でのオーバーフローエラー"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.18326375</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SVarOverflow" resname="System_Sysconst_SVarOverflow">
+        <source>"バリアント オーバーフロー"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.18326375</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SVarInvalid" resname="System_Sysconst_SVarInvalid">
+        <source>"不正な引数が渡されました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.18326375</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SVarBadType" resname="System_Sysconst_SVarBadType">
+        <source>"バリアントタイプが不正です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.18326375</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SVarNotImplemented" resname="System_Sysconst_SVarNotImplemented">
+        <source>"サポートされていない操作です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.18326375</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SVarUnexpected" resname="System_Sysconst_SVarUnexpected">
+        <source>"予期しないバリアントエラー"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.18326375</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SExternalException" resname="System_Sysconst_SExternalException">
+        <source>"外部例外 %x"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.18326375</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SAssertionFailed" resname="System_Sysconst_SAssertionFailed">
+        <source>"アサートが失敗しました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.18326375</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SIntfCastError" resname="System_Sysconst_SIntfCastError">
+        <source>"Interface はサポートされていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.18326375</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SAccessViolationNoArg" resname="System_Sysconst_SAccessViolationNoArg">
+        <source>"アクセス違反"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637616</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SStackOverflow" resname="System_Sysconst_SStackOverflow">
+        <source>"スタックオーバーフロー"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637616</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SControlC" resname="System_Sysconst_SControlC">
+        <source>"CTRL-C"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637616</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SPrivilege" resname="System_Sysconst_SPrivilege">
+        <source>"特権命令"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637616</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SException" resname="System_Sysconst_SException">
+        <source>"%s がモジュール %s の %p で発生しました。\r\n%s%s\r\n"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637616</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SExceptTitle" resname="System_Sysconst_SExceptTitle">
+        <source>"アプリケーションエラー"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637616</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidFormat" resname="System_Sysconst_SInvalidFormat">
+        <source>"書式文字列 '%s' は正しくないか引数の型と一致しません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637616</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SArgumentMissing" resname="System_Sysconst_SArgumentMissing">
+        <source>"書式文字列 '%s' の引数が見つかりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637616</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SDispatchError" resname="System_Sysconst_SDispatchError">
+        <source>"バリアントメソッド呼び出しはサポートされていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637616</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SReadAccess" resname="System_Sysconst_SReadAccess">
+        <source>"読み取り"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637616</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SWriteAccess" resname="System_Sysconst_SWriteAccess">
+        <source>"書き込み"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637616</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SVarArrayCreate" resname="System_Sysconst_SVarArrayCreate">
+        <source>"バリアント配列を作成できません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637731</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SVarArrayBounds" resname="System_Sysconst_SVarArrayBounds">
+        <source>"バリアントまたは安全な配列の添え字の範囲を超えています"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637731</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SVarArrayLocked" resname="System_Sysconst_SVarArrayLocked">
+        <source>"バリアント配列がロックされています"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637731</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidVarCast" resname="System_Sysconst_SInvalidVarCast">
+        <source>"バリアントの型変換が正しくありません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637731</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidVarOp" resname="System_Sysconst_SInvalidVarOp">
+        <source>"バリアントに対する演算が正しくありません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637731</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInOutError" resname="System_Sysconst_SInOutError">
+        <source>"I/O エラー %d"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637731</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_STooManyOpenFiles" resname="System_Sysconst_STooManyOpenFiles">
+        <source>"開かれたファイルが多すぎます。"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637731</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SAccessDenied" resname="System_Sysconst_SAccessDenied">
+        <source>"ファイルへのアクセスが拒否されました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637731</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SEndOfFile" resname="System_Sysconst_SEndOfFile">
+        <source>"ファイルの末尾以降を読み取りました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637731</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SDiskFull" resname="System_Sysconst_SDiskFull">
+        <source>"ディスクがいっぱいです"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637731</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidInput" resname="System_Sysconst_SInvalidInput">
+        <source>"入力値が数値ではありません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637847</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SDivByZero" resname="System_Sysconst_SDivByZero">
+        <source>"ゼロによる除算"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637847</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SRangeError" resname="System_Sysconst_SRangeError">
+        <source>"範囲チェックエラー"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637847</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SIntOverflow" resname="System_Sysconst_SIntOverflow">
+        <source>"整数のオーバーフロー"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637847</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidOp" resname="System_Sysconst_SInvalidOp">
+        <source>"不正な浮動小数点数演算命令"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637847</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SZeroDivide" resname="System_Sysconst_SZeroDivide">
+        <source>"0 による浮動小数点数除算"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637847</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SOverflow" resname="System_Sysconst_SOverflow">
+        <source>"浮動小数点数のオーバーフロー"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637847</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SUnderflow" resname="System_Sysconst_SUnderflow">
+        <source>"浮動小数点数のアンダーフロー"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637847</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidPointer" resname="System_Sysconst_SInvalidPointer">
+        <source>"無効なポインタ操作"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637847</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidCast" resname="System_Sysconst_SInvalidCast">
+        <source>"無効なクラス型キャスト"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637847</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SAccessViolationArg3" resname="System_Sysconst_SAccessViolationArg3">
+        <source>"アドレス %0:p でアドレス %2:p に対する%1:s違反がおきました。"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637963</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sObserverNoInterface" resname="System_Rtlconsts_sObserverNoInterface">
+        <source>"オブジェクトがオブザーバ インターフェイスを実装していません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637963</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sObserverNoSinglecastFound" resname="System_Rtlconsts_sObserverNoSinglecastFound">
+        <source>"ID が %d のシングル キャスト オブザーバがオブザーバ コレクションに追加されていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637963</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sObserverNoMulticastFound" resname="System_Rtlconsts_sObserverNoMulticastFound">
+        <source>"ID が %d のマルチ キャスト オブザーバがオブザーバ コレクションに追加されていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637963</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sObserverNotAvailable" resname="System_Rtlconsts_sObserverNotAvailable">
+        <source>"オブザーバが使用できません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637963</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SLocationSensorStarted" resname="System_Rtlconsts_SLocationSensorStarted">
+        <source>"位置センサが起動されています"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637963</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SUnknown" resname="System_Sysconst_SUnknown">
+        <source>"&lt;未知&gt;"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637963</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidInteger" resname="System_Sysconst_SInvalidInteger">
+        <source>"'%s' は整数ではありません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637963</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidFloat" resname="System_Sysconst_SInvalidFloat">
+        <source>"'%s' は浮動小数点数ではありません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637963</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidDate" resname="System_Sysconst_SInvalidDate">
+        <source>"'%s' は日付ではありません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832637963</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidTime" resname="System_Sysconst_SInvalidTime">
+        <source>"'%s' は時刻ではありません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638079</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidDateTime" resname="System_Sysconst_SInvalidDateTime">
+        <source>"'%s' は日付または時刻ではありません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638079</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidTimeStamp" resname="System_Sysconst_SInvalidTimeStamp">
+        <source>"'%d.%d' は正しいタイムスタンプではありません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638079</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SInvalidGUID" resname="System_Sysconst_SInvalidGUID">
+        <source>"'%s' は正しい GUID ではありません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638079</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_STimeEncodeError" resname="System_Sysconst_STimeEncodeError">
+        <source>"時刻に変換できない値が渡されました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638079</prop><prop prop-type="Status">2</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SDateEncodeError" resname="System_Sysconst_SDateEncodeError">
+        <source>"日付に変換できない値が渡されました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638079</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Sysconst_SOutOfMemory" resname="System_Sysconst_SOutOfMemory">
+        <source>"メモリが足りません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638079</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SSPVersionStr" resname="System_Rtlconsts_SSPVersionStr">
+        <source>"%s Service Pack %4:d (バージョン %1:d.%2:d、ビルド %3:d、%5:s)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638079</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SVersion32" resname="System_Rtlconsts_SVersion32">
+        <source>"32 ビット版"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638079</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SVersion64" resname="System_Rtlconsts_SVersion64">
+        <source>"64 ビット版"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638079</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SWindows" resname="System_Rtlconsts_SWindows">
+        <source>"Windows"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638079</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SWindowsVista" resname="System_Rtlconsts_SWindowsVista">
+        <source>"Windows Vista"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638194</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SWindowsServer2008" resname="System_Rtlconsts_SWindowsServer2008">
+        <source>"Windows Server 2008"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638194</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SWindows7" resname="System_Rtlconsts_SWindows7">
+        <source>"Windows 7"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638194</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SWindowsServer2008R2" resname="System_Rtlconsts_SWindowsServer2008R2">
+        <source>"Windows Server 2008 R2"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638194</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SWindows2000" resname="System_Rtlconsts_SWindows2000">
+        <source>"Windows 2000"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638194</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SWindowsXP" resname="System_Rtlconsts_SWindowsXP">
+        <source>"Windows XP"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638194</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SWindowsServer2003" resname="System_Rtlconsts_SWindowsServer2003">
+        <source>"Windows Server 2003"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638194</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SWindowsServer2003R2" resname="System_Rtlconsts_SWindowsServer2003R2">
+        <source>"Windows Server 2003 R2"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638194</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SWindowsServer2012" resname="System_Rtlconsts_SWindowsServer2012">
+        <source>"Windows Server 2012"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638194</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SWindows8" resname="System_Rtlconsts_SWindows8">
+        <source>"Windows 8"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638194</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sObserverUnsupported" resname="System_Rtlconsts_sObserverUnsupported">
+        <source>"オブザーバがサポートされていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638194</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sObserverMultipleSingleCast" resname="System_Rtlconsts_sObserverMultipleSingleCast">
+        <source>"複数のシングル キャスト オブザーバをオブザーバ コレクションに追加させることはできません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638194</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SNoContext" resname="System_Rtlconsts_SNoContext">
+        <source>"状況依存型ヘルプがインストールされていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263831</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SNoContextFound" resname="System_Rtlconsts_SNoContextFound">
+        <source>"コンテキスト %d のヘルプが見つかりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263831</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SNoIndex" resname="System_Rtlconsts_SNoIndex">
+        <source>"索引を開くことができません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263831</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SNoSearch" resname="System_Rtlconsts_SNoSearch">
+        <source>"検索を開くことができません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263831</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SNoTableOfContents" resname="System_Rtlconsts_SNoTableOfContents">
+        <source>"目次が見つかりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263831</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SNoTopics" resname="System_Rtlconsts_SNoTopics">
+        <source>"トピック ベースのヘルプ システムがインストールされていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263831</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SNothingFound" resname="System_Rtlconsts_SNothingFound">
+        <source>"%s に対応するヘルプが見つかりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263831</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SArgumentOutOfRange" resname="System_Rtlconsts_SArgumentOutOfRange">
+        <source>"引数が範囲外です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263831</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SGenericItemNotFound" resname="System_Rtlconsts_SGenericItemNotFound">
+        <source>"項目が見つかりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263831</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SGenericDuplicateItem" resname="System_Rtlconsts_SGenericDuplicateItem">
+        <source>"複製した項目は使用できません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263831</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SInsufficientRtti" resname="System_Rtlconsts_SInsufficientRtti">
+        <source>"この操作をサポートするために十分な RTTI がありません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263831</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SParameterCountMismatch" resname="System_Rtlconsts_SParameterCountMismatch">
+        <source>"パラメータ数が一致しません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263831</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SNonPublicType" resname="System_Rtlconsts_SNonPublicType">
+        <source>"型 '%s' がユニットの interface セクションで宣言されていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263831</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SByRefArgMismatch" resname="System_Rtlconsts_SByRefArgMismatch">
+        <source>"var 引数および out 引数はパラメータの型と正確に一致する必要があります"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638426</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SServiceNotFound" resname="System_Rtlconsts_SServiceNotFound">
+        <source>"指定されたログイン資格情報サービスが見つかりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638426</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SVersionStr" resname="System_Rtlconsts_SVersionStr">
+        <source>"%s (バージョン %d.%d、ビルド %d、%5:s)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638426</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SPathFormatNotSupported" resname="System_Rtlconsts_SPathFormatNotSupported">
+        <source>"パスの形式がサポートされていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638426</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SFileNotFound" resname="System_Rtlconsts_SFileNotFound">
+        <source>"指定されたファイルが見つかりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638426</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SLocalTimeInvalid" resname="System_Rtlconsts_SLocalTimeInvalid">
+        <source>"指定されたローカル時間 \"%s\" は無効です (DST より前の欠落期間内に位置しています)。"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638426</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_hNoFilterViewer" resname="System_Rtlconsts_hNoFilterViewer">
+        <source>"フィルタをサポートするヘルプ ビューアがありません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638426</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sArgumentOutOfRange_StringIndex" resname="System_Rtlconsts_sArgumentOutOfRange_StringIndex">
+        <source>"文字列インデックスが範囲外です (%d)。%d 以上 %d 以下でなければなりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638426</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sArgumentOutOfRange_InvalidUTF32" resname="System_Rtlconsts_sArgumentOutOfRange_InvalidUTF32">
+        <source>"UTF32 文字値が無効です。サロゲート ペアの範囲を除き、0 以上 $10FFFF 以下でなければなりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638426</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sArgument_InvalidHighSurrogate" resname="System_Rtlconsts_sArgument_InvalidHighSurrogate">
+        <source>"上位サロゲート文字のインデックス %d より後に下位サロゲート文字がありません。文字列が正しくエンコードされているか確認してください"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638426</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sArgument_InvalidLowSurrogate" resname="System_Rtlconsts_sArgument_InvalidLowSurrogate">
+        <source>"下位サロゲート文字のインデックス %d より前に上位サロゲート文字がありません。文字列が正しくエンコードされているか確認してください"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638426</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sInvalidStringAndObjectArrays" resname="System_Rtlconsts_sInvalidStringAndObjectArrays">
+        <source>"文字列配列とオブジェクト配列の長さは等しくなければなりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638542</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sInvalidTimeoutValue" resname="System_Rtlconsts_sInvalidTimeoutValue">
+        <source>"タイムアウト値が無効です: %s"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638542</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sTimespanTooLong" resname="System_Rtlconsts_sTimespanTooLong">
+        <source>"時間間隔が長すぎます"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638542</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sInvalidTimespanDuration" resname="System_Rtlconsts_sInvalidTimespanDuration">
+        <source>"絶対値が TTimeSpan.MaxValue の値を超えているため、時間間隔を返せません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638542</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sTimespanValueCannotBeNan" resname="System_Rtlconsts_sTimespanValueCannotBeNan">
+        <source>"値は NaN 以外でなければなりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638542</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sCannotNegateTimespan" resname="System_Rtlconsts_sCannotNegateTimespan">
+        <source>"時間間隔の最小値を取り消すことは無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638542</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sInvalidTimespanFormat" resname="System_Rtlconsts_sInvalidTimespanFormat">
+        <source>"時間間隔の形式が無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638542</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_sTimespanElementTooLong" resname="System_Rtlconsts_sTimespanElementTooLong">
+        <source>"時間間隔要素が長すぎます"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638542</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SUnknownGroup" resname="System_Rtlconsts_SUnknownGroup">
+        <source>"%s クラス登録グループに存在しません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638542</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SUnknownProperty" resname="System_Rtlconsts_SUnknownProperty">
+        <source>"プロパティ %s が存在しません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638542</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SWriteError" resname="System_Rtlconsts_SWriteError">
+        <source>"ストリームへの書き込みエラー"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638542</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SThreadCreateError" resname="System_Rtlconsts_SThreadCreateError">
+        <source>"スレッド作成エラー: %s"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638542</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SThreadError" resname="System_Rtlconsts_SThreadError">
+        <source>"スレッドエラー: %s (%d)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638657</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SThreadExternalTerminate" resname="System_Rtlconsts_SThreadExternalTerminate">
+        <source>"外部から作成されたスレッドを終了させることはできません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638657</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SThreadExternalWait" resname="System_Rtlconsts_SThreadExternalWait">
+        <source>"外部から作成されたスレッドを待機することはできません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638657</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SThreadStartError" resname="System_Rtlconsts_SThreadStartError">
+        <source>"実行中または一時停止中のスレッドに対しては Start を呼び出せません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638657</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SThreadExternalCheckTerminated" resname="System_Rtlconsts_SThreadExternalCheckTerminated">
+        <source>"外部で生成されたスレッドでは CheckTerminated を呼び出せません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638657</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SThreadExternalSetReturnValue" resname="System_Rtlconsts_SThreadExternalSetReturnValue">
+        <source>"外部で生成されたスレッドでは SetReturnValue を呼び出せません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638657</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SParamIsNil" resname="System_Rtlconsts_SParamIsNil">
+        <source>"パラメータ %s は Nil 以外でなければなりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638657</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SParamIsNegative" resname="System_Rtlconsts_SParamIsNegative">
+        <source>"パラメータ %s は負の値以外でなければなりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638657</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SInputBufferExceed" resname="System_Rtlconsts_SInputBufferExceed">
+        <source>"%s = %d、%s = %d の場合に入力バッファの上限を超えました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638657</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SInvalidCharsInPath" resname="System_Rtlconsts_SInvalidCharsInPath">
+        <source>"パスに無効な文字が含まれています"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638657</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SPathTooLong" resname="System_Rtlconsts_SPathTooLong">
+        <source>"指定されたパスが長すぎます"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638657</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SPathNotFound" resname="System_Rtlconsts_SPathNotFound">
+        <source>"指定されたパスが見つかりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638657</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SMemoryStreamError" resname="System_Rtlconsts_SMemoryStreamError">
+        <source>"メモリーストリームを拡張しているときにメモリーが不足しました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638773</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SNoComSupport" resname="System_Rtlconsts_SNoComSupport">
+        <source>"%s は COM クラスとして登録されていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638773</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SNumberExpected" resname="System_Rtlconsts_SNumberExpected">
+        <source>"数値が必要です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638773</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SAnsiUTF8Expected" resname="System_Rtlconsts_SAnsiUTF8Expected">
+        <source>"ANSI または UTF8 エンコーディングが必要です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638773</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SParseError" resname="System_Rtlconsts_SParseError">
+        <source>"%d 行目: %s"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638773</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SPropertyException" resname="System_Rtlconsts_SPropertyException">
+        <source>"%s%s%s の読み取り中のエラー : %s"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638773</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SReadError" resname="System_Rtlconsts_SReadError">
+        <source>"ストリームからの読み取りエラー"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638773</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SReadOnlyProperty" resname="System_Rtlconsts_SReadOnlyProperty">
+        <source>"プロパティは書き込み禁止です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638773</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SRegCreateFailed" resname="System_Rtlconsts_SRegCreateFailed">
+        <source>"キー %s の作成に失敗しました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638773</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SRegGetDataFailed" resname="System_Rtlconsts_SRegGetDataFailed">
+        <source>"'%s' の取得に失敗しました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638773</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SRegSetDataFailed" resname="System_Rtlconsts_SRegSetDataFailed">
+        <source>"'%s' の設定に失敗しました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638773</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SResNotFound" resname="System_Rtlconsts_SResNotFound">
+        <source>"%s リソースが見つかりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638889</prop><prop prop-type="Status">2</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SSeekNotImplemented" resname="System_Rtlconsts_SSeekNotImplemented">
+        <source>"%s.Seek は実装されていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638889</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SSortedListError" resname="System_Rtlconsts_SSortedListError">
+        <source>"ソートされる文字列リストに対しては許されない動作です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638889</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SStringExpected" resname="System_Rtlconsts_SStringExpected">
+        <source>"文字列が必要です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638889</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SSymbolExpected" resname="System_Rtlconsts_SSymbolExpected">
+        <source>"%s が必要です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638889</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SFOpenErrorEx" resname="System_Rtlconsts_SFOpenErrorEx">
+        <source>"ファイル %s は開けません。 %s "</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638889</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SIdentifierExpected" resname="System_Rtlconsts_SIdentifierExpected">
+        <source>"識別子が必要です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638889</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SIniFileWriteError" resname="System_Rtlconsts_SIniFileWriteError">
+        <source>"%s に書き込めません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638889</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SInvalidBinary" resname="System_Rtlconsts_SInvalidBinary">
+        <source>"バイナリ値が無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832638889</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SInvalidFileName" resname="System_Rtlconsts_SInvalidFileName">
+        <source>"不正なファイル名 - %s"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639005</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SInvalidImage" resname="System_Rtlconsts_SInvalidImage">
+        <source>"ストリーム形式が無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639005</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SInvalidName" resname="System_Rtlconsts_SInvalidName">
+        <source>"コンポーネント名に ''%s'' は使えません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639005</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SInvalidProperty" resname="System_Rtlconsts_SInvalidProperty">
+        <source>"プロパティ値が無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639005</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SInvalidPropertyPath" resname="System_Rtlconsts_SInvalidPropertyPath">
+        <source>"プロパティのパスが無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639005</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SInvalidPropertyValue" resname="System_Rtlconsts_SInvalidPropertyValue">
+        <source>"プロパティ値が無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639005</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SInvalidRegType" resname="System_Rtlconsts_SInvalidRegType">
+        <source>"'%s' のデータ型が不正です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639005</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SInvalidString" resname="System_Rtlconsts_SInvalidString">
+        <source>"文字列定数が無効です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639005</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SLineTooLong" resname="System_Rtlconsts_SLineTooLong">
+        <source>"行が長すぎます"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639005</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SListCapacityError" resname="System_Rtlconsts_SListCapacityError">
+        <source>"リストの容量が超えました (%d)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639005</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SListCountError" resname="System_Rtlconsts_SListCountError">
+        <source>"リストの個数を超えました (%d)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639005</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SListIndexError" resname="System_Rtlconsts_SListIndexError">
+        <source>"リストのインデックスが範囲を超えています (%d)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263912</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Win_Comconst_SOleError" resname="System_Win_Comconst_SOleError">
+        <source>"OLE エラー %.8x"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263912</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Win_Comconst_SNoMethod" resname="System_Win_Comconst_SNoMethod">
+        <source>"メソッド '%s' はオートメーション オブジェクトでサポートしていません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263912</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Win_Comconst_SVarNotObject" resname="System_Win_Comconst_SVarNotObject">
+        <source>"バリアントはオートメーション オブジェクトを参照していません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263912</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Win_Comconst_STooManyParams" resname="System_Win_Comconst_STooManyParams">
+        <source>"ディスパッチメソッドは 64 個を超えるパラメータを処理できません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263912</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SAncestorNotFound" resname="System_Rtlconsts_SAncestorNotFound">
+        <source>"継承元の '%s' が見つかりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263912</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SAssignError" resname="System_Rtlconsts_SAssignError">
+        <source>"%s を %s に代入することはできません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263912</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SBitsIndexError" resname="System_Rtlconsts_SBitsIndexError">
+        <source>"インデックスが範囲を超えました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263912</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SCantWriteResourceStreamError" resname="System_Rtlconsts_SCantWriteResourceStreamError">
+        <source>"読み取り専用リソース ストリームには書き込めません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263912</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SCharExpected" resname="System_Rtlconsts_SCharExpected">
+        <source>"''%s'' が必要です"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.183263912</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SCheckSynchronizeError" resname="System_Rtlconsts_SCheckSynchronizeError">
+        <source>"メインスレッドではないスレッド $%x から CheckSynchronize が呼び出されました"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639236</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SClassNotFound" resname="System_Rtlconsts_SClassNotFound">
+        <source>"クラス %s が見つかりません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639236</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SDuplicateClass" resname="System_Rtlconsts_SDuplicateClass">
+        <source>"クラス名 %s はすでに使われています"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639236</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SDuplicateItem" resname="System_Rtlconsts_SDuplicateItem">
+        <source>"リストは重複を許しません ($0%x)"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639236</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SDuplicateName" resname="System_Rtlconsts_SDuplicateName">
+        <source>"コンポーネント名 %s はすでに使われています"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639236</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SDuplicateString" resname="System_Rtlconsts_SDuplicateString">
+        <source>"文字列リストは重複を許しません"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639236</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+      <trans-unit id="System_Rtlconsts_SFCreateErrorEx" resname="System_Rtlconsts_SFCreateErrorEx">
+        <source>"ファイル \"%s\" を作成できません。%s"</source>
+        <prop-group name="ITEFieldProp">
+        <prop prop-type="Created">43773.1832639236</prop><prop prop-type="Status">0</prop></prop-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

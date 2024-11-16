@@ -1,0 +1,6 @@
+-abe -post_abe -oversamp:1 -enable_hfc:0 -enable_lfc:0 -enable_nr:0 -nr:1600 -nr_option:1 -output_dither:2 -output_dither_option:0 -abe_option:0,1,0 -deE:0 -hfa_preset:1 -hfa3_option:1 -MC_Option:0,0,0,1 -ovwrite_s:4 -ovwrite_w:0 -enable_ovwrite_sw:0 -ovwrite_hfa:0 -enable_ovwrite_hfa:0 -ovwrite_norm:0 -enable_ovwrite_norm:0 -enable_suffix:0 -suffix:upconv
+
+-s -f --best
+-hh -q
+-V4
+Upconv 0.8.x Default Parameter 01
