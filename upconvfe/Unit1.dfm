@@ -910,7 +910,7 @@ object Form1: TForm1
         Font.Name = 'Tahoma'
         Font.Style = []
         Lines.Strings = (
-          'Ver 1.0.12 (2024/10/27)')
+          'Ver 1.0.13 (2024/11/17)')
         ParentFont = False
         ReadOnly = True
         TabOrder = 25
@@ -919,10 +919,6 @@ object Form1: TForm1
     object TabSheet1: TTabSheet
       Caption = 'Option'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object CategoryPanelGroup1: TCategoryPanelGroup
         Left = 0
         Top = 0
@@ -944,7 +940,6 @@ object Form1: TForm1
           Collapsed = True
           TabOrder = 0
           OnExpand = CategoryPanel1_2Expand
-          ExplicitWidth = 185
           ExpandedHeight = 498
           object Label4: TLabel
             Left = 15
@@ -1293,7 +1288,6 @@ object Form1: TForm1
           Caption = 'Convert / Output Option'
           TabOrder = 1
           OnExpand = CategoryPanel1_1Expand
-          ExplicitWidth = 185
           object Label13: TLabel
             Left = 3
             Top = 3
@@ -1803,10 +1797,6 @@ object Form1: TForm1
     object TabSheet2: TTabSheet
       Caption = 'File Extension'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox11: TGroupBox
         Left = 10
         Top = 15
@@ -2054,7 +2044,7 @@ object Form1: TForm1
     Left = 840
     Top = 588
     Bitmap = {
-      494C010104000800C80410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800CC0410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2329,7 +2319,7 @@ object Form1: TForm1
     Left = 780
     Top = 588
     Bitmap = {
-      494C010102000800BC0410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000800C00410001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       00000000000000000000000000000000000000000000078DBE00078DBE00078D
       BE00078DBE00078DBE00078DBE00078DBE00078DBE00078DBE00078DBE00078D

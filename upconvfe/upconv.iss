@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Upconv"
-#define MyAppVersion "1.0.12"
+#define MyAppVersion "1.0.13"
 #define MyAppPublisher "59414d41"
 #define MyAppURL "http://59414d41.cocolog-nifty.com/blog/2019/11/post-f6163f.html"
 #define MyAppExeName "upconvfe.exe"

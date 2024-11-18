@@ -86,6 +86,12 @@ typedef struct {
 	SSIZE	cntLv4;
 	SSIZE	cntLv5;
 	SSIZE	cntLv6;
+	int		clipR1;
+	int		clipR2;
+	int		clipR3;
+	int		clipR4;
+	int		clipR5;
+	int		clipR6;
 } NORM_INFO_WAV2;
 
 typedef struct {
@@ -331,6 +337,8 @@ double normalNoise(void);
 #else
 #define CLIP_NX(v,nx)	((SSIZE)((v) * (nx)) << 6)
 #endif
+
+#define IS_CLIPPED(v)	(v) == 0 ? 0 : ((v) > 0) ? ((v) >> 40) >= (SSIZE)(32439) ? 1 : 0 : ((v) >> 40) <= ((SSIZE)-32439) ? 1 : 0
 
 #define ROUND_NBIT(b)	((SSIZE)1 << (b) - 1) 
 
@@ -1122,7 +1130,9 @@ int to_raw_main(int argc, char *argv[],UPCONV_PARAM *p)
 				}
 
 				p->simple_mode_done_percent_div = 0;
-
+				if (NormInfoWav2.clipR1 || NormInfoWav2.clipR2 || NormInfoWav2.clipR3 || NormInfoWav2.clipR4 || NormInfoWav2.clipR5 || NormInfoWav2.clipR6) {
+					p->clipped = 1;
+				}
 
 				// 音量記録用ファイル名の作成
 				if (1) {
@@ -2936,11 +2946,14 @@ int nBitTo64S(int nCh,int ch,int bit,int bitIntFlag,void *in,FIO *fio,SSIZE nSam
 	SSIZE out;
 	SSIZE max,min;
 	SSIZE maxLv,maxLv2;
+	SSIZE clip_count;
 	int next;
 	fio_size ws;
 
 	ns = 0;
 	maxLv2 = 0;
+	clip_count = 0;
+
 	if (bit == 16) {
 		/* 16Bit */
 		next = 1 * nCh;
@@ -3108,6 +3121,7 @@ int nBitTo64S(int nCh,int ch,int bit,int bitIntFlag,void *in,FIO *fio,SSIZE nSam
 					}
 				}
 				p16 += next;
+				if (IS_CLIPPED(out)) clip_count++;
 				ws = fio_write(&out,sizeof (SSIZE),1,fio);
 				if (fio->error || ws != 1) {
 					break;
@@ -3146,6 +3160,7 @@ int nBitTo64S(int nCh,int ch,int bit,int bitIntFlag,void *in,FIO *fio,SSIZE nSam
 				}
 
 				p24 += next;
+				if (IS_CLIPPED(out)) clip_count++;
 				ws = fio_write(&out,sizeof (SSIZE),1,fio);
 				if (fio->error || ws != 1) {
 					break;
@@ -3184,6 +3199,7 @@ int nBitTo64S(int nCh,int ch,int bit,int bitIntFlag,void *in,FIO *fio,SSIZE nSam
 				}
 
 				p24 += next;
+				if (IS_CLIPPED(out)) clip_count++;
 				ws = fio_write(&out,sizeof (SSIZE),1,fio);
 				if (fio->error || ws != 1) {
 					break;
@@ -3217,6 +3233,7 @@ int nBitTo64S(int nCh,int ch,int bit,int bitIntFlag,void *in,FIO *fio,SSIZE nSam
 					}
 					
 					p32 += next;
+					if (IS_CLIPPED(out)) clip_count++;
 					ws = fio_write(&out,sizeof (SSIZE),1,fio);
 					if (fio->error || ws != 1) {
 						break;
@@ -3249,6 +3266,7 @@ int nBitTo64S(int nCh,int ch,int bit,int bitIntFlag,void *in,FIO *fio,SSIZE nSam
 						}
 					}
 					p32int += next;
+					if (IS_CLIPPED(out)) clip_count++;
 					ws = fio_write(&out,sizeof (SSIZE),1,fio);
 					if (fio->error || ws != 1) {
 						break;
@@ -3282,6 +3300,7 @@ int nBitTo64S(int nCh,int ch,int bit,int bitIntFlag,void *in,FIO *fio,SSIZE nSam
 				}
 
 				p64 += next;
+				if (IS_CLIPPED(out)) clip_count++;
 				ws = fio_write(&out,sizeof (SSIZE),1,fio);
 				if (fio->error || ws != 1) {
 					break;
@@ -3298,36 +3317,42 @@ int nBitTo64S(int nCh,int ch,int bit,int bitIntFlag,void *in,FIO *fio,SSIZE nSam
 		NormInfoWav2.maxLv1 = maxLv;
 		NormInfoWav2.tmpLv1 = maxLv2;
 		NormInfoWav2.cntLv1 = ns;
+		if ((nSample / 4000) < clip_count) NormInfoWav2.clipR1 = 1;
 	} else if (ch == 1) {
 		NormInfoWav2.maxR2 = max;
 		NormInfoWav2.minR2 = min;
 		NormInfoWav2.maxLv2 = maxLv;
 		NormInfoWav2.tmpLv2 = maxLv2;
 		NormInfoWav2.cntLv2 = ns;
+		if ((nSample / 4000) < clip_count) NormInfoWav2.clipR2 = 1;
 	} else if (ch == 2) {
 		NormInfoWav2.maxR3 = max;
 		NormInfoWav2.minR3 = min;
 		NormInfoWav2.maxLv3 = maxLv;
 		NormInfoWav2.tmpLv3 = maxLv2;
 		NormInfoWav2.cntLv3 = ns;
+		if ((nSample / 4000) < clip_count) NormInfoWav2.clipR3 = 1;
 	} else if (ch == 3) {
 		NormInfoWav2.maxR4 = max;
 		NormInfoWav2.minR4 = min;
 		NormInfoWav2.maxLv4 = maxLv;
 		NormInfoWav2.tmpLv4 = maxLv2;
 		NormInfoWav2.cntLv4 = ns;
+		if ((nSample / 4000) < clip_count) NormInfoWav2.clipR4 = 1;
 	} else if (ch == 4) {
 		NormInfoWav2.maxR5 = max;
 		NormInfoWav2.minR5 = min;
 		NormInfoWav2.maxLv5 = maxLv;
 		NormInfoWav2.tmpLv5 = maxLv2;
 		NormInfoWav2.cntLv5 = ns;
+		if ((nSample / 4000) < clip_count) NormInfoWav2.clipR5 = 1;
 	} else if (ch == 5) {
 		NormInfoWav2.maxR6 = max;
 		NormInfoWav2.minR6 = min;
 		NormInfoWav2.maxLv6 = maxLv;
 		NormInfoWav2.tmpLv6 = maxLv2;
 		NormInfoWav2.cntLv6 = ns;
+		if ((nSample / 4000) < clip_count) NormInfoWav2.clipR6 = 1;
 	}
 
 	if (fio->error || ws != 1) {
@@ -4622,6 +4647,16 @@ int to_wav_main(int argc, char *argv[],UPCONV_PARAM *p)
 				sprintf(sss,"paramInfo.nx4:%lf",paramInfo.nx4);PRINT_LOG(sss);
 				sprintf(sss,"paramInfo.nx5:%lf",paramInfo.nx5);PRINT_LOG(sss);
 				sprintf(sss,"paramInfo.nx6:%lf",paramInfo.nx6);PRINT_LOG(sss);
+
+				if (p->nr != -1 || p->hfa == 2 || p->hfa == 3 || p->hfa == 4) {
+					PRINT_LOG("nr hfa nx");
+					if (paramInfo.nx1 != 0) paramInfo.nx1 *= 1.3;
+					if (paramInfo.nx2 != 0) paramInfo.nx2 *= 1.3;
+					if (paramInfo.nx3 != 0) paramInfo.nx3 *= 1.3;
+					if (paramInfo.nx4 != 0) paramInfo.nx4 *= 1.3;
+					if (paramInfo.nx5 != 0) paramInfo.nx5 *= 1.3;
+					if (paramInfo.nx6 != 0) paramInfo.nx6 *= 1.3;
+				}
 
 				strcpy(paramInfo.pr_str,"[raw2wav]");
 				if (p->eq_analyze > 0 && p->index_pre_eq > 0) {
@@ -7884,11 +7919,14 @@ int updateLevelInfo(SSIZE inSample,int ch_num,FIO *fp_r1,FIO *fp_r2,FIO *fp_r3,F
 				if (p->norm == 1) {
 					nx = (double)(32767 * p->vla_nx) / real_peak2;
 				}
-				do {
-					if (IS_CLIP_MAX(real_peak2 << 40,nx) == 0) break;
-					nx -= 0.01;
-				} while (nx >= 0.75);
-				
+				if (p->clipped) {
+					sprintf(sss,"----------------- clipped -----------------");
+					PRINT_LOG(sss);
+					do {
+						if (IS_CLIP_MAX(real_peak2 << 40,nx) == 0) break;
+						nx -= 0.01;
+					} while (nx >= 0.73);
+				}
 				levelInfo_to->nx = nx;
 				sprintf(sss,"updateLevelInfo(volume_level_enable=0):nx:%lf",nx);
 				PRINT_LOG("----------");
@@ -8882,7 +8920,15 @@ int Normalize_M0(int nCh,int ch,int bit,FIO *fp_r,SSIZE nSample,BYTE *buffer,PAR
 			return STATUS_FILE_READ_ERR;
 		}
 		s = CLIP_NX(s,nx);
-		
+#if 0
+		if (IS_CLIPPED(s)) {
+			if (s > 0) {
+				s--;
+			} else {
+				s++;
+			}
+		}
+#endif
 		if (bit == 16) {
 			s = CLIP_MAX(s);
 			s >>= (64 - 16);
@@ -8997,7 +9043,19 @@ int Normalize_M1(int nCh,int ch,int bit,FIO *fp_r,SSIZE nSample,BYTE *buffer,PAR
 		}
 
 		s = CLIP_NX(s,nx);
-
+#if 0
+		if (IS_CLIPPED(s)) {
+			if (s > 0) {
+				s--;
+				s--;
+				s--;
+			} else {
+				s++;
+				s++;
+				s++;
+			}
+		}
+#endif
 		noise = normalNoise();
 		if (bit == 16) {
 			if (p->output_dither_option > 0) {
@@ -9188,7 +9246,19 @@ int Normalize_M2(int nCh,int ch,int bit,FIO *fp_r,SSIZE nSample,BYTE *buffer,PAR
 		}
 
 		s = CLIP_NX(s,nx);
-
+#if 0
+		if (IS_CLIPPED(s)) {
+			if (s > 0) {
+				s--;
+				s--;
+				s--;
+			} else {
+				s++;
+				s++;
+				s++;
+			}
+		}
+#endif
 		noise = normalNoise();
 		if (bit == 16) {
 			// 四捨五入

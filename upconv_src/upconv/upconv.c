@@ -475,6 +475,7 @@ PRINT_LINE("init");
 		param.p->fio_sec_size = 0;
 		param.p->fio_mb_size  = 0;
 		param.p->abe_version = 1;
+		param.p->clipped = 0;
 
 		param.err = STATUS_SUCCESS;
 		param.disRc = 0;
@@ -11138,7 +11139,8 @@ param->p->hfa3_max = 0;
 	} else {
 		fftSize_LevelAdj = fftSize / 12;
 		LevelAdjCount = 12;
-		LevelAdjHz = 1400;
+		LevelAdjHz = 1000;
+		LevelAdjHz = 1700;
 		LevelAdjHz = 2200;
 	}
 
@@ -12048,6 +12050,7 @@ param->p->hfa3_max = 0;
 				if (j > 0) {
 					refPw /= j;
 				}
+				refPw -= (refPw / 10);
 
 				// 付加信号の高域のパワーを調べる
 				for (j = 0;j < fftSize / LevelAdjCount;j++) {
@@ -21081,7 +21084,7 @@ void adjPinkFilter(int mode,long fftSizeOut,fftw_complex *fftw_out2,PARAM_INFO *
 	long cutOff;
 	long outSampleR;
 
-	if (param->p->hfa3_version == 1 || param->p->hfa3_pp == 1/* || param->p->hfa == 4*/) {
+	if (param->p->hfa3_version == 1 || param->p->hfa3_pp == 1 || param->p->hfa == 4) {
 		adjPinkFilter_0774(mode,fftSizeOut,fftw_out2,param);
 		return;
 	}

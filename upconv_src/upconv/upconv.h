@@ -228,6 +228,7 @@ typedef struct {
 	int LRC_process_Center;
 	int MS_LRC_mode;
 	long skip_start_offset;
+	int clipped;
 	
 	// raw2wav
 	double median_per;
