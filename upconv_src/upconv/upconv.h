@@ -134,6 +134,8 @@ typedef struct {
 	int addp_overrap;
 	int cpu_pri;
 	int thread;
+	int fftw_multi_thread;
+	int upconv_total;
 	int mc_flag;
 	int dsd_fmt;
 	long fio;

@@ -84,6 +84,8 @@
 								(((SSIZE)(v) * nx) <= ((SSIZE)0x007FFFFFFFFFFFFFF * -1) ? ((SSIZE)0x7FFFFFFFFFFFFFF * -1) : ((SSIZE)((v) * nx))))
 								
 #define PEAK_DIFF_THRESH	(1000)
+#define FAST_DIFF_PW_THRESH	((double)200033560873692)
+#define DIFF_PW_CUT_THRESH	(30)
 
 //#define NOCLEANUP
 
@@ -188,6 +190,7 @@ typedef struct {
 	double	hfa4_coeff[76800*4];
 	double  hfa4_lag[76800*4];
 	size_t	hfa4_index[76800*4];
+	SSIZE	startInSample;
 	int		base_freq;
 	int		sign[76800*4];
 	int		pw_cnt[76800*4];
@@ -197,6 +200,8 @@ typedef struct {
 	long	samplingRate;
 	long	sfa_sec;
 	long	sfa_hfc;
+	long	fftSize;
+	long	fftFastSize;
 	int		do2Idx[360];
 	double	*phaseX;
 	double	*phaseY;
@@ -204,6 +209,7 @@ typedef struct {
 	int hfa3_log;
 	int index;
 	int kp_flag;
+	int fast_index;
 } OVERTONE_INFO;
 
 typedef struct {
@@ -324,7 +330,7 @@ void adjBitExtension_086(SSIZE inSample,FIO *fio_r,FIO *fio_w,PARAM_INFO *param)
 void adjBitExtension_10x(SSIZE inSample,FIO *fio_r,FIO *fio_w,PARAM_INFO *param);
 void genNoise(long hfc,SSIZE inSample,FIO *fio_r,FIO *fio_w,PARAM_INFO *param);
 void genOverTone(long hfc,SSIZE inSample,FIO *fio_r,FIO *fio_w,PARAM_INFO *param,FFT_PARAM *fft_param);
-void genOverToneSub(long hfc,SSIZE *pIn,SSIZE *pOut,fftw_complex *fftw_in,fftw_complex *fftw_out,fftw_plan fftw_p,fftw_plan fftw_ip,OVERTONE_INFO *ovInfo,PARAM_INFO *param,FFT_PARAM *fft_param);
+void genOverToneSub(long hfc,SSIZE *pIn,SSIZE *pOut,fftw_complex *fftw_in,fftw_complex *fftw_out,fftw_plan fftw_p,fftw_plan fftw_ip,fftw_complex *fftw_fast_in,fftw_complex *fftw_fast_out,fftw_plan fftw_fast_p,fftw_plan fftw_fast_ip,OVERTONE_INFO *ovInfo,PARAM_INFO *param,FFT_PARAM *fft_param);
 
 void noiseCut(long nfs,SSIZE inSample,FIO *fio_r,FIO *fio_w,PARAM_INFO *param);
 void anaOverToneHFA2(OVERTONE_INFO *ovInfo,PARAM_INFO *param);
@@ -467,6 +473,7 @@ PRINT_LINE("init");
 		param.p->lpf = -1;
 		param.p->nr = -1;
 		param.p->thread = 1;
+		param.p->upconv_total = 0;
 		param.p->post_nr = -1;
 		param.p->index_pre_eq = -1;
 		param.p->index_post_eq = -1;
@@ -476,6 +483,7 @@ PRINT_LINE("init");
 		param.p->fio_mb_size  = 0;
 		param.p->abe_version = 1;
 		param.p->clipped = 0;
+		param.p->fftw_multi_thread = 0;
 
 		param.err = STATUS_SUCCESS;
 		param.disRc = 0;
@@ -1115,6 +1123,14 @@ PRINT_LINE("argc == 4");
 						param.p->thread = (int)temp;
 					}
 				}
+				if (strcmp(p1,"-fftw_multi_thread") == 0) {
+					param.p->fftw_multi_thread = 1;
+				}
+				if (sscanf(p1,"-upconv_total:%ld",&temp) == 1) {
+					if (temp > 0) {
+						param.p->upconv_total = (int)temp;
+					}
+				}
 
 				if (strcmp(p1,"-hfaFast") == 0) {
 					param.p->hfaFast = 1;
@@ -1568,17 +1584,6 @@ PRINT_LINE("cmdline parse end");
 			}
 #endif
 
-#if 0
-			retCode = PLG_InfoAudioData(argv[1],&inFmt,&inSample,NULL);
-			if (retCode != STATUS_SUCCESS) {
-				sprintf(work,"Can't get Info(PLG_InfoAudioData):%s",argv[1]);
-				PRINT_LOG(param.debug_upconv,work);
-				retCode = STATUS_PARAMETER_ERR;
-				param.errLine = __LINE__;
-				break;
-			}
-#endif
-
 			PRINT_FN_LOG(param.debug_upconv,"main:start");
 //			if (argc != 4) {
 //				sprintf(work,"argc:%d,argv:[%s,%s,%s,%s,%s]",argc,argv[0],argv[1],argv[2],argv[3],argv[4]);
@@ -1599,11 +1604,21 @@ PRINT_LINE("cmdline parse end");
 //			PRINT_LOG(param.debug_upconv,sss);
 
 #ifdef _OPENMP
-			int nCpu;
-			nCpu = param.p->thread;
-			omp_set_num_threads(nCpu);
+			omp_set_num_threads(param.p->thread);
 #endif
+#ifdef FFTW_MULTI_THREAD
+			if (param.upconv == 1 && param.p->fftw_multi_thread == 0) {
+				param.p->fftw_multi_thread = 1;
+			}
 
+			if (param.p->fftw_multi_thread == 1) {
+				char m[200];
+				fftw_init_threads();
+				fftw_plan_with_nthreads(param.p->thread);
+				sprintf(m,"fftw_plan_with_nthreads:%d",param.p->thread);
+				PRINT_LOG("upconv",m);
+			}
+#endif
 			if (param.process_id == 0) {
 				int arg_count;
 				char *arg[6];
@@ -1872,7 +1887,7 @@ PRINT_LINE("process_id:0");
 						break; // pipe done
 					} else {
 						// Error
-						PRINT_LOG(param.debug_upconv,"pipe error");
+//						PRINT_LOG(param.debug_upconv,"pipe error");
 						break;
 					}
 					if (read_size == 0) {
@@ -2087,9 +2102,9 @@ PRINT_LINE("process_id:0");
 //							PRINT_LOG(param.debug_upconv,"5");
 							
 							if (param.p->LRC_process == 1 && ip == 2) {
-								sprintf(s,"-process_id:2 -upconv:%d -is:%ld -s:%ld -iw:%d -w:%d -LRC_process_Center:1",ip + 1,param.p->inSampleR,param.p->outSampleR,param.p->iw,param.p->w);
+								sprintf(s,"-process_id:2 -upconv:%d -upconv_total:%d -is:%ld -s:%ld -iw:%d -w:%d -LRC_process_Center:1",ip + 1,r_nnn_remain * param.channel_count,param.p->inSampleR,param.p->outSampleR,param.p->iw,param.p->w);
 							} else {
-								sprintf(s,"-process_id:2 -upconv:%d -is:%ld -s:%ld -iw:%d -w:%d",ip + 1,param.p->inSampleR,param.p->outSampleR,param.p->iw,param.p->w);
+								sprintf(s,"-process_id:2 -upconv:%d -upconv_total:%d -is:%ld -s:%ld -iw:%d -w:%d",ip + 1,r_nnn_remain * param.channel_count,param.p->inSampleR,param.p->outSampleR,param.p->iw,param.p->w);
 							}
 							if (argc != 4) {
 								p1 = strstr(arg[4],"-process_id:");
@@ -2106,6 +2121,7 @@ PRINT_LINE("process_id:0");
 									strcat(arg[3],s);
 								}
 							}
+							PRINT_LOG("upconv",s);
 							q_info[ip].startexec_info[rip].r_nnn = get_next_r_nnn(q_info[ip].done_flag,r_nnn_count);
 //							sprintf(sss,"get_next_r_nnn:%d",q_info[ip].startexec_info[rip].r_nnn);
 //							PRINT_LOG(param.debug_upconv,sss);
@@ -2417,10 +2433,29 @@ PRINT_LINE("process_id:0");
 
 			} else if (param.process_id == 2 && param.upconv > 0) {
 //				PRINT_LOG(param.debug_upconv,"upconv.exe SamplingRate");
+
+#ifdef FFTW_MULTI_THREAD
+			int nCpu;
+			char m[200];
+			nCpu = param.p->thread;
+			if (param.p->upconv_total > 0) {
+				nCpu /= param.p->upconv_total;
+				if (nCpu < 2) {
+					nCpu = 2;
+				}
+			}
+			if (param.p->fftw_multi_thread == 1) {
+				sprintf(m,"omp_get_max_threads:%d,upconv_total:%d",nCpu,param.p->upconv_total);
+				PRINT_LOG("upconv",m);
+				omp_set_num_threads(nCpu);
+			}
+#endif
+
 				if (chkAbort(0,0)) {
 					abort_flag = 1;
 					break;
 				}
+
 
 				if (param.p->hfc != -1) {
 					param.p->hfc_auto = 0;
@@ -2648,6 +2683,9 @@ PRINT_LINE("process_id:0");
 				}
 			}
 		}
+#ifdef FFTW_MULTI_THREAD
+		fftw_cleanup_threads();
+#endif
 		if (!(argc == 4 || argc == 5 || argc == 6) || !(paramFlag == 0x0007 || (paramFlag == 0x0005 && param.p->no_rate_conv != -1))) {
 			PRINT_LOG(param.debug_upconv,"argc err");
 			printf(STR_COPYRIGHT);
@@ -10973,7 +11011,7 @@ void genOverTone(long hfc,SSIZE inSample,FIO *fp_r,FIO *fp_w,PARAM_INFO *param,F
 	
 	SSIZE memTotal;
 	long wkMemSize;
-	long fftSize,fftSize_LevelAdj,i,ii,j,k,nn;
+	long fftSize,fftFastSize,fftSize_LevelAdj,i,ii,j,k,nn;
 	long stepFftSize;
 	long LevelAdjCount;
 	long LevelAdjHz;
@@ -10981,9 +11019,11 @@ void genOverTone(long hfc,SSIZE inSample,FIO *fp_r,FIO *fp_w,PARAM_INFO *param,F
 	long deadenIndex;
 	long fft_malloc_size;
 	long sfa_sec;
+	long fast_index,fast_index_count;
+	long fast_diff_pw_flag;
 	double percent,per;
 	double nx;
-	double p,refPw,ovTonePw;
+	double p,refPw,ovTonePw,refLowHzPw;
 	double spike_diff,spike_work,spike[10];
 	double avg;
 	double hfa_nx;
@@ -10994,6 +11034,14 @@ void genOverTone(long hfc,SSIZE inSample,FIO *fp_r,FIO *fp_w,PARAM_INFO *param,F
 	SSIZE hh,mm,ss;
 	fftw_complex *fftw_in[9],*fftw_out[9],*fftw_in2,*fftw_in3;
 	fftw_plan fftw_p[9],fftw_ip[9],fftw_p2,fftw_p3;
+
+	// 時間分解能を高めるためのFFTW用変数(1/3サイズ)
+	fftw_complex *fftw_fast_in[9],*fftw_fast_out[9];
+	fftw_plan fftw_fast_p[9],fftw_fast_ip[9];
+
+	// カットオフ周波数付近のpowerを保存しておく変数(配列0番前回、配列1番以降から4つは今回の比較用)
+	double *pw_tres[5];
+
 	OVERTONE_INFO *ovInfo[9];
 	double *phaseX,*phaseY;
 	double table_hfa_level[5] = {0.5, 0.1, 0.05, 0.03, 0.01};
@@ -11009,6 +11057,11 @@ void genOverTone(long hfc,SSIZE inSample,FIO *fp_r,FIO *fp_w,PARAM_INFO *param,F
 	ovInfo[6] = NULL;
 	ovInfo[7] = NULL;
 	ovInfo[8] = NULL;
+	pw_tres[0] = NULL;
+	pw_tres[1] = NULL;
+	pw_tres[2] = NULL;
+	pw_tres[3] = NULL;
+	pw_tres[4] = NULL;
 
 	PRINT_FN_LOG(param->debug_upconv,"-genOverTone:Start");
 
@@ -11122,27 +11175,17 @@ param->p->hfa3_max = 0;
 	sprintf(sss,"GenOverTone:fftSize:%ld",fftSize);
 	PRINT_LOG("HFA4",sss);
 
-	if (param->p->hfa != 4) {
-		if (param->p->hfa3_version < 3) {
-			fftSize_LevelAdj = fftSize / 12;
-			LevelAdjCount = 12;
-			LevelAdjHz = 2000;
-		} else {
-			fftSize_LevelAdj = fftSize / 14;
-			LevelAdjCount = 14;
-			if (param->p->hfa3_fft_window_lvl != 0) {
-				fftSize_LevelAdj = fftSize / param->p->hfa3_fft_window_lvl;
-				LevelAdjCount = param->p->hfa3_fft_window_lvl;
-			}
-			LevelAdjHz = param->p->hfa_level_adjust_width;
+	fftSize_LevelAdj = fftSize / 6;
+	LevelAdjCount = 6;
+	LevelAdjHz = 2200;
+
+	if (param->p->hfa3_version >= 3) {
+		if (param->p->hfa3_fft_window_lvl != 0) {
+			fftSize_LevelAdj = fftSize / param->p->hfa3_fft_window_lvl;
+			LevelAdjCount = param->p->hfa3_fft_window_lvl;
 		}
-	} else {
-		fftSize_LevelAdj = fftSize / 12;
-		LevelAdjCount = 12;
-		LevelAdjHz = 1000;
-		LevelAdjHz = 1700;
-		LevelAdjHz = 2200;
 	}
+	fftFastSize = fftSize / 3;	// 現時点では未使用(無効化)
 
 	wkMemSize = (fftSize + (fftSize * 2)) * sizeof (SSIZE);
 
@@ -11171,8 +11214,8 @@ param->p->hfa3_max = 0;
 		return;
 	}
 
-	sprintf(sss,"GenOverTone:hfa3_fft_window_per_1s:%d",param->p->hfa3_fft_window_per_1s);
-	PRINT_LOG("HFA4",sss);
+//	sprintf(sss,"GenOverTone:hfa3_fft_window_per_1s:%d",param->p->hfa3_fft_window_per_1s);
+//	PRINT_LOG("HFA4",sss);
 
 	if (param->p->hfa3_fft_window_per_1s > 0) {
 		memTotal += wkMemSize;
@@ -11344,6 +11387,46 @@ param->p->hfa3_max = 0;
 		return;
 	}
 
+	// 1(fast)
+	memTotal += sizeof(fftw_complex) * (fft_malloc_size / 3);
+	fftw_fast_in[0] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 3));
+	if (fftw_fast_in[0] == NULL) {
+		param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+		return;
+	}
+	memTotal += sizeof(fftw_complex) * (fft_malloc_size / 3);
+	fftw_fast_out[0] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 3));
+	if (fftw_fast_out[0] == NULL) {
+		param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+		return;
+	}
+	// 2(fast)
+	memTotal += sizeof(fftw_complex) * (fft_malloc_size / 3);
+	fftw_fast_in[1] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 3));
+	if (fftw_fast_in[1] == NULL) {
+		param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+		return;
+	}
+	memTotal += sizeof(fftw_complex) * (fft_malloc_size / 3);
+	fftw_fast_out[1] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 3));
+	if (fftw_fast_out[1] == NULL) {
+		param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+		return;
+	}
+	// 3(fast)
+	memTotal += sizeof(fftw_complex) * (fft_malloc_size / 3);
+	fftw_fast_in[2] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 3));
+	if (fftw_fast_in[2] == NULL) {
+		param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+		return;
+	}
+	memTotal += sizeof(fftw_complex) * (fft_malloc_size / 4);
+	fftw_fast_out[2] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 4));
+	if (fftw_fast_out[2] == NULL) {
+		param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+		return;
+	}
+
 	if (param->p->hfa3_fft_window_per_1s > 0) {
 		// 4
 		memTotal += sizeof(fftw_complex) * fft_malloc_size;
@@ -11371,6 +11454,33 @@ param->p->hfa3_max = 0;
 			param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
 			return;
 		}
+		// 4(fast)
+		memTotal += sizeof(fftw_complex) * (fft_malloc_size / 3);
+		fftw_fast_in[3] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 3));
+		if (fftw_fast_in[3] == NULL) {
+			param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+			return;
+		}
+		memTotal += sizeof(fftw_complex) * (fft_malloc_size / 3);
+		fftw_fast_out[3] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 3));
+		if (fftw_fast_out[3] == NULL) {
+			param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+			return;
+		}
+		// 5(fast)
+		memTotal += sizeof(fftw_complex) * (fft_malloc_size / 3);
+		fftw_fast_in[4] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 3));
+		if (fftw_fast_in[4] == NULL) {
+			param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+			return;
+		}
+		memTotal += sizeof(fftw_complex) * (fft_malloc_size / 3);
+		fftw_fast_out[4] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 3));
+		if (fftw_fast_out[4] == NULL) {
+			param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+			return;
+		}
+
 		if (param->p->hfa3_fft_window_per_1s > 1) {
 			// 6
 			memTotal += sizeof(fftw_complex) * fft_malloc_size;
@@ -11424,7 +11534,75 @@ param->p->hfa3_max = 0;
 				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
 				return;
 			}
+
+			// 6(fast)
+			memTotal += sizeof(fftw_complex) * (fft_malloc_size / 3);
+			fftw_fast_in[5] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 3));
+			if (fftw_fast_in[5] == NULL) {
+				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+				return;
+			}
+			memTotal += sizeof(fftw_complex) * (fft_malloc_size / 3);
+			fftw_fast_out[5] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 3));
+			if (fftw_fast_out[5] == NULL) {
+				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+				return;
+			}
+			// 7(fast)
+			memTotal += sizeof(fftw_complex) * (fft_malloc_size / 3);
+			fftw_fast_in[6] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 3));
+			if (fftw_fast_in[6] == NULL) {
+				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+				return;
+			}
+			memTotal += sizeof(fftw_complex) * (fft_malloc_size / 3);
+			fftw_fast_out[6] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 3));
+			if (fftw_fast_out[6] == NULL) {
+				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+				return;
+			}
+			// 8(fast)
+			memTotal += sizeof(fftw_complex) * (fft_malloc_size / 3);
+			fftw_fast_in[7] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 3));
+			if (fftw_fast_in[7] == NULL) {
+				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+				return;
+			}
+			memTotal += sizeof(fftw_complex) * (fft_malloc_size / 3);
+			fftw_fast_out[7] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 3));
+			if (fftw_fast_out[7] == NULL) {
+				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+				return;
+			}
+			// 9(fast)
+			memTotal += sizeof(fftw_complex) * (fft_malloc_size / 3);
+			fftw_fast_in[8] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 3));
+			if (fftw_fast_in[8] == NULL) {
+				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+				return;
+			}
+			memTotal += sizeof(fftw_complex) * (fft_malloc_size / 3);
+			fftw_fast_out[8] = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (fft_malloc_size / 3));
+			if (fftw_fast_out[8] == NULL) {
+				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+				return;
+			}
 		}
+	}
+
+	lowIndex  = (((double)fftFastSize) / outSampleR) * (hfc - 3000);
+	highIndex = (((double)fftFastSize) / outSampleR) * hfc;
+	pw_tres[0] = (double *)malloc((highIndex - lowIndex) * sizeof (double));
+	pw_tres[1] = (double *)malloc((highIndex - lowIndex) * sizeof (double));
+	pw_tres[2] = (double *)malloc((highIndex - lowIndex) * sizeof (double));
+	pw_tres[3] = (double *)malloc((highIndex - lowIndex) * sizeof (double));
+	pw_tres[4] = (double *)malloc((highIndex - lowIndex) * sizeof (double));
+	if (pw_tres[0] == NULL || pw_tres[1] == NULL || pw_tres[2] == NULL || pw_tres[3] == NULL || pw_tres[4] == NULL) {
+		param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+		return;
+	}
+	for (i = 0;i < highIndex - lowIndex;i++) {
+		pw_tres[0][i] = 0;
 	}
 
 	// 1
@@ -11462,6 +11640,43 @@ param->p->hfa3_max = 0;
 		param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
 		return;
 	}
+
+	// 1(fast)
+	fftw_fast_p[0] = fftw_plan_dft_1d(fftFastSize,fftw_fast_in[0],fftw_fast_out[0],FFTW_FORWARD,FFTW_ESTIMATE);
+	if (fftw_fast_p[0] == NULL) {
+		param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+		return;
+	}
+	fftw_fast_ip[0] = fftw_plan_dft_1d(fftFastSize,fftw_fast_out[0],fftw_fast_in[0],FFTW_BACKWARD,FFTW_ESTIMATE);
+	if (fftw_fast_ip[0] == NULL) {
+		param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+		return;
+	}
+
+	// 2(fast)
+	fftw_fast_p[1] = fftw_plan_dft_1d(fftFastSize,fftw_fast_in[1],fftw_fast_out[1],FFTW_FORWARD,FFTW_ESTIMATE);
+	if (fftw_fast_p[1] == NULL) {
+		param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+		return;
+	}
+	fftw_fast_ip[1] = fftw_plan_dft_1d(fftFastSize,fftw_fast_out[1],fftw_fast_in[1],FFTW_BACKWARD,FFTW_ESTIMATE);
+	if (fftw_fast_ip[1] == NULL) {
+		param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+		return;
+	}
+
+	// 3(fast)
+	fftw_fast_p[2] = fftw_plan_dft_1d(fftFastSize,fftw_fast_in[2],fftw_fast_out[2],FFTW_FORWARD,FFTW_ESTIMATE);
+	if (fftw_fast_p[2] == NULL) {
+		param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+		return;
+	}
+	fftw_fast_ip[2] = fftw_plan_dft_1d(fftFastSize,fftw_fast_out[2],fftw_fast_in[2],FFTW_BACKWARD,FFTW_ESTIMATE);
+	if (fftw_fast_ip[2] == NULL) {
+		param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+		return;
+	}
+
 	if (param->p->hfa3_fft_window_per_1s > 0) {
 		// 4
 		fftw_p[3] = fftw_plan_dft_1d(fftSize,fftw_in[3],fftw_out[3],FFTW_FORWARD,FFTW_ESTIMATE);
@@ -11482,6 +11697,29 @@ param->p->hfa3_max = 0;
 		}
 		fftw_ip[4] = fftw_plan_dft_1d(fftSize,fftw_out[4],fftw_in[4],FFTW_BACKWARD,FFTW_ESTIMATE);
 		if (fftw_ip[4] == NULL) {
+			param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+			return;
+		}
+
+		// 4(fast)
+		fftw_fast_p[3] = fftw_plan_dft_1d(fftFastSize,fftw_fast_in[3],fftw_fast_out[3],FFTW_FORWARD,FFTW_ESTIMATE);
+		if (fftw_fast_p[3] == NULL) {
+			param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+			return;
+		}
+		fftw_fast_ip[3] = fftw_plan_dft_1d(fftFastSize,fftw_fast_out[3],fftw_fast_in[3],FFTW_BACKWARD,FFTW_ESTIMATE);
+		if (fftw_fast_ip[3] == NULL) {
+			param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+			return;
+		}
+		// 5(fast)
+		fftw_fast_p[4] = fftw_plan_dft_1d(fftFastSize,fftw_fast_in[4],fftw_fast_out[4],FFTW_FORWARD,FFTW_ESTIMATE);
+		if (fftw_fast_p[4] == NULL) {
+			param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+			return;
+		}
+		fftw_fast_ip[4] = fftw_plan_dft_1d(fftFastSize,fftw_fast_out[4],fftw_fast_in[4],FFTW_BACKWARD,FFTW_ESTIMATE);
+		if (fftw_fast_ip[4] == NULL) {
 			param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
 			return;
 		}
@@ -11527,6 +11765,51 @@ param->p->hfa3_max = 0;
 			}
 			fftw_ip[8] = fftw_plan_dft_1d(fftSize,fftw_out[8],fftw_in[8],FFTW_BACKWARD,FFTW_ESTIMATE);
 			if (fftw_ip[8] == NULL) {
+				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+				return;
+			}
+
+			// 6(fast)
+			fftw_fast_p[5] = fftw_plan_dft_1d(fftFastSize,fftw_fast_in[5],fftw_fast_out[5],FFTW_FORWARD,FFTW_ESTIMATE);
+			if (fftw_fast_p[5] == NULL) {
+				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+				return;
+			}
+			fftw_fast_ip[5] = fftw_plan_dft_1d(fftFastSize,fftw_fast_out[5],fftw_fast_in[5],FFTW_BACKWARD,FFTW_ESTIMATE);
+			if (fftw_fast_ip[5] == NULL) {
+				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+				return;
+			}
+			// 7(fast)
+			fftw_fast_p[6] = fftw_plan_dft_1d(fftFastSize,fftw_fast_in[6],fftw_fast_out[6],FFTW_FORWARD,FFTW_ESTIMATE);
+			if (fftw_fast_p[6] == NULL) {
+				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+				return;
+			}
+			fftw_fast_ip[6] = fftw_plan_dft_1d(fftFastSize,fftw_fast_out[6],fftw_fast_in[6],FFTW_BACKWARD,FFTW_ESTIMATE);
+			if (fftw_fast_ip[6] == NULL) {
+				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+				return;
+			}
+			// 8(fast)
+			fftw_fast_p[7] = fftw_plan_dft_1d(fftFastSize,fftw_fast_in[7],fftw_fast_out[7],FFTW_FORWARD,FFTW_ESTIMATE);
+			if (fftw_fast_p[7] == NULL) {
+				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+				return;
+			}
+			fftw_fast_ip[7] = fftw_plan_dft_1d(fftFastSize,fftw_fast_out[7],fftw_fast_in[7],FFTW_BACKWARD,FFTW_ESTIMATE);
+			if (fftw_fast_ip[7] == NULL) {
+				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+				return;
+			}
+			// 9(fast)
+			fftw_fast_p[8] = fftw_plan_dft_1d(fftFastSize,fftw_fast_in[8],fftw_fast_out[8],FFTW_FORWARD,FFTW_ESTIMATE);
+			if (fftw_fast_p[8] == NULL) {
+				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
+				return;
+			}
+			fftw_fast_ip[8] = fftw_plan_dft_1d(fftFastSize,fftw_fast_out[8],fftw_fast_in[8],FFTW_BACKWARD,FFTW_ESTIMATE);
+			if (fftw_fast_ip[8] == NULL) {
 				param->err = STATUS_MEM_ALLOC_ERR;param->errLine = __LINE__;
 				return;
 			}
@@ -11619,6 +11902,8 @@ param->p->hfa3_max = 0;
 	ovInfo[0]->phaseX = phaseX;
 	ovInfo[0]->phaseY = phaseY;
 	ovInfo[0]->index = 0;
+	ovInfo[0]->fftSize = fftSize;
+	ovInfo[0]->fftFastSize = fftFastSize;
 
 	ovInfo[1]->nSample = fftSize / 2;
 	ovInfo[1]->validSamplingRate = hfc;
@@ -11627,6 +11912,8 @@ param->p->hfa3_max = 0;
 	ovInfo[1]->phaseY = phaseY;
 	ovInfo[1]->log = 1;
 	ovInfo[1]->index = 1;
+	ovInfo[1]->fftSize = fftSize;
+	ovInfo[1]->fftFastSize = fftFastSize;
 
 	ovInfo[2]->nSample = fftSize / 2;
 	ovInfo[2]->validSamplingRate = hfc;
@@ -11634,6 +11921,8 @@ param->p->hfa3_max = 0;
 	ovInfo[2]->phaseX = phaseX;
 	ovInfo[2]->phaseY = phaseY;
 	ovInfo[2]->index = 2;
+	ovInfo[2]->fftSize = fftSize;
+	ovInfo[2]->fftFastSize = fftFastSize;
 	if (param->p->hfa3_fft_window_per_1s > 0) {
 		ovInfo[3]->nSample = fftSize / 2;
 		ovInfo[3]->validSamplingRate = hfc;
@@ -11641,6 +11930,8 @@ param->p->hfa3_max = 0;
 		ovInfo[3]->phaseX = phaseX;
 		ovInfo[3]->phaseY = phaseY;
 		ovInfo[3]->index = 3;
+		ovInfo[3]->fftSize = fftSize;
+		ovInfo[3]->fftFastSize = fftFastSize;
 
 		ovInfo[4]->nSample = fftSize / 2;
 		ovInfo[4]->validSamplingRate = hfc;
@@ -11648,6 +11939,8 @@ param->p->hfa3_max = 0;
 		ovInfo[4]->phaseX = phaseX;
 		ovInfo[4]->phaseY = phaseY;
 		ovInfo[4]->index = 4;
+		ovInfo[4]->fftSize = fftSize;
+		ovInfo[4]->fftFastSize = fftFastSize;
 	}
 	if (param->p->hfa3_fft_window_per_1s > 1) {
 		ovInfo[5]->nSample = fftSize / 2;
@@ -11656,6 +11949,8 @@ param->p->hfa3_max = 0;
 		ovInfo[5]->phaseX = phaseX;
 		ovInfo[5]->phaseY = phaseY;
 		ovInfo[5]->index = 5;
+		ovInfo[5]->fftSize = fftSize;
+		ovInfo[5]->fftFastSize = fftFastSize;
 
 		ovInfo[6]->nSample = fftSize / 2;
 		ovInfo[6]->validSamplingRate = hfc;
@@ -11663,6 +11958,8 @@ param->p->hfa3_max = 0;
 		ovInfo[6]->phaseX = phaseX;
 		ovInfo[6]->phaseY = phaseY;
 		ovInfo[6]->index = 6;
+		ovInfo[6]->fftSize = fftSize;
+		ovInfo[6]->fftFastSize = fftFastSize;
 
 		ovInfo[7]->nSample = fftSize / 2;
 		ovInfo[7]->validSamplingRate = hfc;
@@ -11670,6 +11967,8 @@ param->p->hfa3_max = 0;
 		ovInfo[7]->phaseX = phaseX;
 		ovInfo[7]->phaseY = phaseY;
 		ovInfo[7]->index = 7;
+		ovInfo[7]->fftSize = fftSize;
+		ovInfo[7]->fftFastSize = fftFastSize;
 
 		ovInfo[8]->nSample = fftSize / 2;
 		ovInfo[8]->validSamplingRate = hfc;
@@ -11677,6 +11976,8 @@ param->p->hfa3_max = 0;
 		ovInfo[8]->phaseX = phaseX;
 		ovInfo[8]->phaseY = phaseY;
 		ovInfo[8]->index = 8;
+		ovInfo[8]->fftSize = fftSize;
+		ovInfo[8]->fftFastSize = fftFastSize;
 	}
 
 	stepFftSize = fftSize;
@@ -11805,16 +12106,26 @@ param->p->hfa3_max = 0;
 		ovInfo[0]->sfa_sec = startInSample / outSampleR;
 		ovInfo[1]->sfa_sec = startInSample / outSampleR;
 		ovInfo[2]->sfa_sec = startInSample / outSampleR;
+		ovInfo[0]->startInSample = startInSample;
+		ovInfo[1]->startInSample = startInSample;
+		ovInfo[2]->startInSample = startInSample;
 		if (param->p->hfa3_fft_window_per_1s >= 1) {
 			ovInfo[3]->sfa_sec = startInSample / outSampleR;
 			ovInfo[4]->sfa_sec = startInSample / outSampleR;
+			ovInfo[3]->startInSample = startInSample;
+			ovInfo[4]->startInSample = startInSample;
 		}
 		if (param->p->hfa3_fft_window_per_1s >= 2) {
 			ovInfo[5]->sfa_sec = startInSample / outSampleR;
 			ovInfo[6]->sfa_sec = startInSample / outSampleR;
 			ovInfo[7]->sfa_sec = startInSample / outSampleR;
 			ovInfo[8]->sfa_sec = startInSample / outSampleR;
+			ovInfo[5]->startInSample = startInSample;
+			ovInfo[6]->startInSample = startInSample;
+			ovInfo[7]->startInSample = startInSample;
+			ovInfo[8]->startInSample = startInSample;
 		}
+
 		if (param->enable_sfa == 1) {
 			int sfa_hfc;
 			// SFA 用の HFC 設定(データがある上限の周波数を使用する
@@ -11857,144 +12168,287 @@ param->p->hfa3_max = 0;
 			hfc = sfa_hfc;
 		}
 
-		if (param->p->hfa3_fft_window_per_1s == 2) {
-			#pragma omp parallel
-			{
-				#pragma omp sections
-				{
-					#pragma omp section
-					{
-						// 1
-						genOverToneSub(hfc,pIn[0],pOut[0],fftw_in[0],fftw_out[0],fftw_p[0],fftw_ip[0],ovInfo[0],param,fft_param);
-					}
-					#pragma omp section
-					{
-						// 2
-						genOverToneSub(hfc,pIn[1],pOut[1],fftw_in[1],fftw_out[1],fftw_p[1],fftw_ip[1],ovInfo[1],param,fft_param);
-					}
-					#pragma omp section
-					{
-						// 3
-						genOverToneSub(hfc,pIn[2],pOut[2],fftw_in[2],fftw_out[2],fftw_p[2],fftw_ip[2],ovInfo[2],param,fft_param);
-					}
-					#pragma omp section
-					{
-						// 4
-						genOverToneSub(hfc,pIn[3],pOut[3],fftw_in[3],fftw_out[3],fftw_p[3],fftw_ip[3],ovInfo[3],param,fft_param);
-					}
-					#pragma omp section
-					{
-						// 5
-						genOverToneSub(hfc,pIn[4],pOut[4],fftw_in[4],fftw_out[4],fftw_p[4],fftw_ip[4],ovInfo[4],param,fft_param);
-					}
-					#pragma omp section
-					{
-						// 6
-						genOverToneSub(hfc,pIn[5],pOut[5],fftw_in[5],fftw_out[5],fftw_p[5],fftw_ip[5],ovInfo[5],param,fft_param);
-					}
-					#pragma omp section
-					{
-						// 7
-						genOverToneSub(hfc,pIn[6],pOut[6],fftw_in[6],fftw_out[6],fftw_p[6],fftw_ip[6],ovInfo[6],param,fft_param);
-					}
-					#pragma omp section
-					{
-						// 8
-						genOverToneSub(hfc,pIn[7],pOut[7],fftw_in[7],fftw_out[7],fftw_p[7],fftw_ip[7],ovInfo[7],param,fft_param);
-					}
-					#pragma omp section
-					{
-						// 9
-						genOverToneSub(hfc,pIn[8],pOut[8],fftw_in[8],fftw_out[8],fftw_p[8],fftw_ip[8],ovInfo[8],param,fft_param);
-					}
-				}
-			}
-			windowData(mem2,fftSize * 2);
-			windowData(mem3,fftSize * 2);
-			windowData(mem4,fftSize * 2);
-			windowData(mem5,fftSize * 2);
-			windowData(mem6,fftSize * 2);
-			windowData(mem7,fftSize * 2);
-			windowData(mem8,fftSize * 2);
-			windowData(mem9,fftSize * 2);
-			windowData(mem10,fftSize * 2);
+		// 周波数の変化を調べる
+		ovInfo[0]->nSample = fftSize / 2;
+		ovInfo[1]->nSample = fftSize / 2;
+		ovInfo[2]->nSample = fftSize / 2;
+		ovInfo[0]->fast_index = -1;
+		ovInfo[1]->fast_index = -1;
+		ovInfo[2]->fast_index = -1;
 
-			windowData(mem2,fftSize * 2);
-			windowData(mem3,fftSize * 2);
-			windowData(mem4,fftSize * 2);
-			windowData(mem5,fftSize * 2);
-			windowData(mem6,fftSize * 2);
-			windowData(mem7,fftSize * 2);
-			windowData(mem8,fftSize * 2);
-			windowData(mem9,fftSize * 2);
-			windowData(mem10,fftSize * 2);
-			for (i = 0;i < fftSize * 2;i++) {
-				mem2[i] += mem3[i] + mem4[i] + mem5[i] + mem6[i] + mem7[i] + mem8[i] + mem9[i] + mem10[i];
+		if (param->p->hfa3_fft_window_per_1s > 0) {
+			ovInfo[3]->nSample = fftSize / 2;
+			ovInfo[4]->nSample = fftSize / 2;
+			ovInfo[3]->fast_index = -1;
+			ovInfo[4]->fast_index = -1;
+		}
+		if (param->p->hfa3_fft_window_per_1s > 1) {
+			ovInfo[5]->nSample = fftSize / 2;
+			ovInfo[6]->nSample = fftSize / 2;
+			ovInfo[7]->nSample = fftSize / 2;
+			ovInfo[8]->nSample = fftSize / 2;
+			ovInfo[5]->fast_index = -1;
+			ovInfo[6]->fast_index = -1;
+			ovInfo[7]->fast_index = -1;
+			ovInfo[8]->fast_index = -1;
+		}
+
+		fast_index = 0;
+		fast_index_count = 1;
+
+		if (startInSample + fftFastSize / 2 >= 0) {
+			SSIZE *pIn2;
+			pIn2  = (SSIZE *)mem1;
+			pIn2  += (fftFastSize / 2);
+			double fastDiffPw = 0;
+			double tempFastdiffPw;
+			long   fastDiffPwCount = 0;
+			for (i = 0;i < 3;i++) {
+				for (j = 0;j < fftFastSize;j++) {
+					fftw_fast_in[0][j][0] = pIn2[j];
+					fftw_fast_in[0][j][1] = 0;
+				}
+				pIn2 += fftFastSize;
+				// 窓関数
+				for (j = 0;j < (fftFastSize - 1) / 2;j++) {
+					fftw_fast_in[0][j][0] = fftw_fast_in[0][j][0] * (2.0 * j / (double)fftFastSize);
+				}
+				for (j = (fftFastSize - 1) / 2;j < fftFastSize;j++) {
+					fftw_fast_in[0][j][0] = fftw_fast_in[0][j][0] * (2.0 - 2.0 * j / (double)fftFastSize);
+				}
+				// FFT
+				fftw_execute(fftw_fast_p[0]);
+
+				// 元信号の高域のパワーを調べる
+				lowIndex = ((double)fftFastSize / outSampleR)  * (hfc - 3000);
+				highIndex = ((double)fftFastSize / outSampleR) * hfc;
+				for (j = lowIndex,nn = 0;j < highIndex;j++,nn++) {
+					p = fftw_fast_in[0][j][0] * fftw_fast_in[0][j][0] + fftw_fast_in[0][j][1] * fftw_fast_in[0][j][1];
+					if (p != 0) {
+						p = sqrt(p);
+					}
+					if (nn >= 76800 * 4) {
+						exit(0);
+					}
+					pw_tres[i + 1][nn] = p;
+				}
 			}
-		} else if (param->p->hfa3_fft_window_per_1s == 1) {
-			#pragma omp parallel
-			{
-				#pragma omp sections
-				{
-					#pragma omp section
-					{
-						// 1
-						genOverToneSub(hfc,pIn[0],pOut[0],fftw_in[0],fftw_out[0],fftw_p[0],fftw_ip[0],ovInfo[0],param,fft_param);
+			for (i = 0;i < 3;i++) {
+				for (j = lowIndex,nn = 0;j < highIndex;j++,nn++) {
+					if (pw_tres[i + 1][nn] >= pw_tres[i][nn]) {
+						tempFastdiffPw = pw_tres[i + 1][nn] - pw_tres[i][nn];
+					} else {
+						tempFastdiffPw = pw_tres[i][nn] - pw_tres[i + 1][nn];
 					}
-					#pragma omp section
-					{
-						// 2
-						genOverToneSub(hfc,pIn[1],pOut[1],fftw_in[1],fftw_out[1],fftw_p[1],fftw_ip[1],ovInfo[1],param,fft_param);
-					}
-					#pragma omp section
-					{
-						// 3
-						genOverToneSub(hfc,pIn[2],pOut[2],fftw_in[2],fftw_out[2],fftw_p[2],fftw_ip[2],ovInfo[2],param,fft_param);
-					}
-					#pragma omp section
-					{
-						// 4
-						genOverToneSub(hfc,pIn[3],pOut[3],fftw_in[3],fftw_out[3],fftw_p[3],fftw_ip[3],ovInfo[3],param,fft_param);
-					}
-					#pragma omp section
-					{
-						// 5
-						genOverToneSub(hfc,pIn[4],pOut[4],fftw_in[4],fftw_out[4],fftw_p[4],fftw_ip[4],ovInfo[4],param,fft_param);
+					fastDiffPw += tempFastdiffPw;
+					fastDiffPwCount++;
+				}
+				if (i == 0) {
+					// index3 の値に前回の値を設定する
+					for (j = lowIndex,nn = 0;j < highIndex;j++,nn++) {
+						pw_tres[0][nn] = pw_tres[3][nn];
 					}
 				}
 			}
-			windowData(mem2,fftSize * 2);
-			windowData(mem3,fftSize * 2);
-			windowData(mem4,fftSize * 2);
-			windowData(mem5,fftSize * 2);
-			windowData(mem6,fftSize * 2);
-			for (i = 0;i < fftSize * 2;i++) {
-				mem2[i] += mem3[i] + mem4[i] + mem5[i] + mem6[i];
+			if (fastDiffPwCount > 0) {
+				fastDiffPw /= fastDiffPwCount;
 			}
-		} else {
-			#pragma omp parallel
-			{
-				#pragma omp sections
-				{
-					#pragma omp section
-					{
-						// 1
-						genOverToneSub(hfc,pIn[0],pOut[0],fftw_in[0],fftw_out[0],fftw_p[0],fftw_ip[0],ovInfo[0],param,fft_param);
-					}
-					#pragma omp section
-					{
-						// 2
-						genOverToneSub(hfc,pIn[1],pOut[1],fftw_in[1],fftw_out[1],fftw_p[1],fftw_ip[1],ovInfo[1],param,fft_param);
-					}
-					#pragma omp section
-					{
-						// 3
-						genOverToneSub(hfc,pIn[2],pOut[2],fftw_in[2],fftw_out[2],fftw_p[2],fftw_ip[2],ovInfo[2],param,fft_param);
-					}
+//			if (1) {
+//				char sss[200];
+//				sprintf(sss,"fastDiffPw: sec:%lld,%lf",startInSample / outSampleR,fastDiffPw);
+//				PRINT_LOG("HFA4",sss);
+//			}
+
+			fast_diff_pw_flag = 0;
+			if (fastDiffPw >= (double)3000000000000000) {
+				fast_diff_pw_flag = 1;
+			}
+#if 0
+			if (fast_diff_pw_flag == 1) {
+				if (1) {
+					char sss[200];
+					sprintf(sss,"fastDiffPw: sec:%lld,%lf",startInSample / outSampleR,fastDiffPw);
+					PRINT_LOG("HFA4",sss);
+				}
+				fast_index_count = 3;
+				ovInfo[0]->nSample = fftFastSize / 2;
+				ovInfo[1]->nSample = fftFastSize / 2;
+				ovInfo[2]->nSample = fftFastSize / 2;
+				ovInfo[0]->fast_index = 0;
+				ovInfo[1]->fast_index = 0;
+				ovInfo[2]->fast_index = 0;
+				if (param->p->hfa3_fft_window_per_1s > 0) {
+					ovInfo[3]->nSample = fftFastSize / 2;
+					ovInfo[4]->nSample = fftFastSize / 2;
+					ovInfo[3]->fast_index = 0;
+					ovInfo[4]->fast_index = 0;
+				}
+				if (param->p->hfa3_fft_window_per_1s > 1) {
+					ovInfo[5]->nSample = fftFastSize / 2;
+					ovInfo[6]->nSample = fftFastSize / 2;
+					ovInfo[7]->nSample = fftFastSize / 2;
+					ovInfo[8]->nSample = fftFastSize / 2;
+					ovInfo[5]->fast_index = 0;
+					ovInfo[6]->fast_index = 0;
+					ovInfo[7]->fast_index = 0;
+					ovInfo[8]->fast_index = 0;
 				}
 			}
-			for (i = 0;i < fftSize * 2;i++) {
-				mem2[i] += mem3[i] + mem4[i];
+#endif
+		}
+		for (;fast_index < fast_index_count;fast_index++) {
+			if (param->p->hfa3_fft_window_per_1s == 2) {
+				#pragma omp parallel
+				{
+					#pragma omp sections
+					{
+						#pragma omp section
+						{
+							// 1
+							genOverToneSub(hfc,pIn[0],pOut[0],fftw_in[0],fftw_out[0],fftw_p[0],fftw_ip[0],fftw_fast_in[0],fftw_fast_out[0],fftw_fast_p[0],fftw_fast_ip[0],ovInfo[0],param,fft_param);
+						}
+						#pragma omp section
+						{
+							// 2
+							genOverToneSub(hfc,pIn[1],pOut[1],fftw_in[1],fftw_out[1],fftw_p[1],fftw_ip[1],fftw_fast_in[1],fftw_fast_out[1],fftw_fast_p[1],fftw_fast_ip[1],ovInfo[1],param,fft_param);
+						}
+						#pragma omp section
+						{
+							// 3
+							genOverToneSub(hfc,pIn[2],pOut[2],fftw_in[2],fftw_out[2],fftw_p[2],fftw_ip[2],fftw_fast_in[2],fftw_fast_out[2],fftw_fast_p[2],fftw_fast_ip[2],ovInfo[2],param,fft_param);
+						}
+						#pragma omp section
+						{
+							// 4
+							genOverToneSub(hfc,pIn[3],pOut[3],fftw_in[3],fftw_out[3],fftw_p[3],fftw_ip[3],fftw_fast_in[3],fftw_fast_out[3],fftw_fast_p[3],fftw_fast_ip[3],ovInfo[3],param,fft_param);
+						}
+						#pragma omp section
+						{
+							// 5
+							genOverToneSub(hfc,pIn[4],pOut[4],fftw_in[4],fftw_out[4],fftw_p[4],fftw_ip[4],fftw_fast_in[4],fftw_fast_out[4],fftw_fast_p[4],fftw_fast_ip[4],ovInfo[4],param,fft_param);
+						}
+						#pragma omp section
+						{
+							// 6
+							genOverToneSub(hfc,pIn[5],pOut[5],fftw_in[5],fftw_out[5],fftw_p[5],fftw_ip[5],fftw_fast_in[5],fftw_fast_out[5],fftw_fast_p[5],fftw_fast_ip[5],ovInfo[5],param,fft_param);
+						}
+						#pragma omp section
+						{
+							// 7
+							genOverToneSub(hfc,pIn[6],pOut[6],fftw_in[6],fftw_out[6],fftw_p[6],fftw_ip[6],fftw_fast_in[6],fftw_fast_out[6],fftw_fast_p[6],fftw_fast_ip[6],ovInfo[6],param,fft_param);
+						}
+						#pragma omp section
+						{
+							// 8
+							genOverToneSub(hfc,pIn[7],pOut[7],fftw_in[7],fftw_out[7],fftw_p[7],fftw_ip[7],fftw_fast_in[7],fftw_fast_out[7],fftw_fast_p[7],fftw_fast_ip[7],ovInfo[7],param,fft_param);
+						}
+						#pragma omp section
+						{
+							// 9
+							genOverToneSub(hfc,pIn[8],pOut[8],fftw_in[8],fftw_out[8],fftw_p[8],fftw_ip[8],fftw_fast_in[8],fftw_fast_out[8],fftw_fast_p[8],fftw_fast_ip[8],ovInfo[8],param,fft_param);
+						}
+					}
+				}
+				windowData(mem2,fftSize * 2);
+				windowData(mem3,fftSize * 2);
+				windowData(mem4,fftSize * 2);
+				windowData(mem5,fftSize * 2);
+				windowData(mem6,fftSize * 2);
+				windowData(mem7,fftSize * 2);
+				windowData(mem8,fftSize * 2);
+				windowData(mem9,fftSize * 2);
+				windowData(mem10,fftSize * 2);
+
+				windowData(mem2,fftSize * 2);
+				windowData(mem3,fftSize * 2);
+				windowData(mem4,fftSize * 2);
+				windowData(mem5,fftSize * 2);
+				windowData(mem6,fftSize * 2);
+				windowData(mem7,fftSize * 2);
+				windowData(mem8,fftSize * 2);
+				windowData(mem9,fftSize * 2);
+				windowData(mem10,fftSize * 2);
+				for (i = 0;i < fftSize * 2;i++) {
+					mem2[i] += mem3[i] + mem4[i] + mem5[i] + mem6[i] + mem7[i] + mem8[i] + mem9[i] + mem10[i];
+				}
+			} else if (param->p->hfa3_fft_window_per_1s == 1) {
+				#pragma omp parallel
+				{
+					#pragma omp sections
+					{
+						#pragma omp section
+						{
+							// 1
+							genOverToneSub(hfc,pIn[0],pOut[0],fftw_in[0],fftw_out[0],fftw_p[0],fftw_ip[0],fftw_fast_in[0],fftw_fast_out[0],fftw_fast_p[0],fftw_fast_ip[0],ovInfo[0],param,fft_param);
+						}
+						#pragma omp section
+						{
+							// 2
+							genOverToneSub(hfc,pIn[1],pOut[1],fftw_in[1],fftw_out[1],fftw_p[1],fftw_ip[1],fftw_fast_in[1],fftw_fast_out[1],fftw_fast_p[1],fftw_fast_ip[1],ovInfo[1],param,fft_param);
+						}
+						#pragma omp section
+						{
+							// 3
+							genOverToneSub(hfc,pIn[2],pOut[2],fftw_in[2],fftw_out[2],fftw_p[2],fftw_ip[2],fftw_fast_in[2],fftw_fast_out[2],fftw_fast_p[2],fftw_fast_ip[2],ovInfo[2],param,fft_param);
+						}
+						#pragma omp section
+						{
+							// 4
+							genOverToneSub(hfc,pIn[3],pOut[3],fftw_in[3],fftw_out[3],fftw_p[3],fftw_ip[3],fftw_fast_in[3],fftw_fast_out[3],fftw_fast_p[3],fftw_fast_ip[3],ovInfo[3],param,fft_param);
+						}
+						#pragma omp section
+						{
+							// 5
+							genOverToneSub(hfc,pIn[4],pOut[4],fftw_in[4],fftw_out[4],fftw_p[4],fftw_ip[4],fftw_fast_in[4],fftw_fast_out[4],fftw_fast_p[4],fftw_fast_ip[4],ovInfo[4],param,fft_param);
+						}
+					}
+				}
+				windowData(mem2,fftSize * 2);
+				windowData(mem3,fftSize * 2);
+				windowData(mem4,fftSize * 2);
+				windowData(mem5,fftSize * 2);
+				windowData(mem6,fftSize * 2);
+				for (i = 0;i < fftSize * 2;i++) {
+					mem2[i] += mem3[i] + mem4[i] + mem5[i] + mem6[i];
+				}
+			} else {
+				#pragma omp parallel
+				{
+					#pragma omp sections
+					{
+						#pragma omp section
+						{
+							// 1
+							genOverToneSub(hfc,pIn[0],pOut[0],fftw_in[0],fftw_out[0],fftw_p[0],fftw_ip[0],fftw_fast_in[0],fftw_fast_out[0],fftw_fast_p[0],fftw_fast_ip[0],ovInfo[0],param,fft_param);
+						}
+						#pragma omp section
+						{
+							// 2
+							genOverToneSub(hfc,pIn[1],pOut[1],fftw_in[1],fftw_out[1],fftw_p[1],fftw_ip[1],fftw_fast_in[1],fftw_fast_out[1],fftw_fast_p[1],fftw_fast_ip[1],ovInfo[1],param,fft_param);
+						}
+						#pragma omp section
+						{
+							// 3
+							genOverToneSub(hfc,pIn[2],pOut[2],fftw_in[2],fftw_out[2],fftw_p[2],fftw_ip[2],fftw_fast_in[2],fftw_fast_out[2],fftw_fast_p[2],fftw_fast_ip[2],ovInfo[2],param,fft_param);
+						}
+					}
+				}
+				for (i = 0;i < fftSize * 2;i++) {
+					mem2[i] += mem3[i] + mem4[i];
+				}
+			}
+			if (ovInfo[0]->fast_index >= 0)	ovInfo[0]->fast_index++;
+			if (ovInfo[1]->fast_index >= 0)	ovInfo[1]->fast_index++;
+			if (ovInfo[2]->fast_index >= 0)	ovInfo[2]->fast_index++;
+			if (param->p->hfa3_fft_window_per_1s > 0) {
+				if (ovInfo[3]->fast_index >= 0)	ovInfo[3]->fast_index++;
+				if (ovInfo[4]->fast_index >= 0)	ovInfo[4]->fast_index++;
+			}
+			if (param->p->hfa3_fft_window_per_1s > 1) {
+				if (ovInfo[5]->fast_index >= 0)	ovInfo[5]->fast_index++;
+				if (ovInfo[6]->fast_index >= 0)	ovInfo[6]->fast_index++;
+				if (ovInfo[7]->fast_index >= 0)	ovInfo[7]->fast_index++;
+				if (ovInfo[8]->fast_index >= 0)	ovInfo[8]->fast_index++;
 			}
 		}
 		if (startInSample + fftSize / 2 >= 0) {
@@ -12021,6 +12475,36 @@ param->p->hfa3_max = 0;
 				fftw_execute(fftw_p2);
 
 				// 元信号の高域のパワーを調べる
+				refLowHzPw = 0;
+				lowIndex = 1;
+				highIndex = (((double)fftSize / LevelAdjCount) / outSampleR) * 5000;
+				memset(ovInfo[0]->avg,0,sizeof (double));
+				for (j = lowIndex,nn = 0;j < highIndex;j++,nn++) {
+					p = fftw_in2[j][0] * fftw_in2[j][0] + fftw_in2[j][1] * fftw_in2[j][1];
+					if (p != 0) {
+						p = sqrt(p);
+					}
+					if (nn >= 76800 * 4) {
+						exit(0);
+					}
+					ovInfo[0]->avg[nn] = p;
+				}
+				for (j = 0;j + 1 < nn;j++) {
+					for (k = j;k < nn;k++) {
+						if (ovInfo[0]->avg[j] > ovInfo[0]->avg[k]) {
+							p = ovInfo[0]->avg[j];
+							ovInfo[0]->avg[j] = ovInfo[0]->avg[k];
+							ovInfo[0]->avg[k] = p;
+						}
+					}
+				}
+				for (j = 0;j + 2 < nn;j++) {
+					refLowHzPw += ovInfo[0]->avg[j];
+				}
+				if (j > 0) {
+					refLowHzPw /= j;
+				}
+
 				refPw = 0;
 				lowIndex = (((double)fftSize / LevelAdjCount) / outSampleR) * (hfc - LevelAdjHz);
 				highIndex = (((double)fftSize / LevelAdjCount) / outSampleR) * hfc;
@@ -12093,7 +12577,14 @@ param->p->hfa3_max = 0;
 				if (j > 0) {
 					ovTonePw /= j;
 				}
-				if (ovTonePw > 0) {
+
+//				if (startInSample / outSampleR > 88) {
+//					char sss[200];
+//					sprintf(sss,"LevelAdjPw: sec:%lld,refLowHzPw:%lf,refPw:%lf,ovTonePw:%lf",startInSample / outSampleR,refLowHzPw,refPw,ovTonePw);
+//					PRINT_LOG("HFA4",sss);
+//				}
+
+				if (refPw >= 9000000000) {
 					for (j = 0;j < fftSize / LevelAdjCount;j++) {
 						pOut2[j] *= ((refPw / ovTonePw));
 						pOut2[j] *= hfa_nx;
@@ -12106,6 +12597,7 @@ param->p->hfa3_max = 0;
 						pOut2[j] = 0;
 					}
 				}
+
 				pOut2 += fftSize / LevelAdjCount;
 			}
 			if (LevelAdjCount == 0) {
@@ -12137,7 +12629,6 @@ param->p->hfa3_max = 0;
 			}
 		}
 	}
-	PRINT_LOG("",sss);
 	fio_flush(fp_w);
 	al_free(mem1);
 	al_free(mem2);
@@ -12178,12 +12669,28 @@ param->p->hfa3_max = 0;
 
 	fftw_destroy_plan(fftw_p[2]);
 	fftw_destroy_plan(fftw_ip[2]);
+
+	fftw_destroy_plan(fftw_fast_p[0]);
+	fftw_destroy_plan(fftw_fast_ip[0]);
+
+	fftw_destroy_plan(fftw_fast_p[1]);
+	fftw_destroy_plan(fftw_fast_ip[1]);
+
+	fftw_destroy_plan(fftw_fast_p[2]);
+	fftw_destroy_plan(fftw_fast_ip[2]);
+
 	if (param->p->hfa3_fft_window_per_1s > 0) {
 		fftw_destroy_plan(fftw_p[3]);
 		fftw_destroy_plan(fftw_ip[3]);
 
 		fftw_destroy_plan(fftw_p[4]);
 		fftw_destroy_plan(fftw_ip[4]);
+
+		fftw_destroy_plan(fftw_fast_p[3]);
+		fftw_destroy_plan(fftw_fast_ip[3]);
+
+		fftw_destroy_plan(fftw_fast_p[4]);
+		fftw_destroy_plan(fftw_fast_ip[4]);
 	}
 	if (param->p->hfa3_fft_window_per_1s > 1) {
 		fftw_destroy_plan(fftw_p[5]);
@@ -12197,6 +12704,18 @@ param->p->hfa3_max = 0;
 
 		fftw_destroy_plan(fftw_p[8]);
 		fftw_destroy_plan(fftw_ip[8]);
+
+		fftw_destroy_plan(fftw_fast_p[5]);
+		fftw_destroy_plan(fftw_fast_ip[5]);
+
+		fftw_destroy_plan(fftw_fast_p[6]);
+		fftw_destroy_plan(fftw_fast_ip[6]);
+
+		fftw_destroy_plan(fftw_fast_p[7]);
+		fftw_destroy_plan(fftw_fast_ip[7]);
+
+		fftw_destroy_plan(fftw_fast_p[8]);
+		fftw_destroy_plan(fftw_fast_ip[8]);
 	}
 
 	fftw_destroy_plan(fftw_p2);
@@ -12210,11 +12729,26 @@ param->p->hfa3_max = 0;
 
 	fftw_free(fftw_in[2]);
 	fftw_free(fftw_out[2]);
+
+	fftw_free(fftw_fast_in[0]);
+	fftw_free(fftw_fast_out[0]);
+
+	fftw_free(fftw_fast_in[1]);
+	fftw_free(fftw_fast_out[1]);
+
+	fftw_free(fftw_fast_in[2]);
+	fftw_free(fftw_fast_out[2]);
+
 	if (param->p->hfa3_fft_window_per_1s > 0) {
 		fftw_free(fftw_in[3]);
 		fftw_free(fftw_out[3]);
 		fftw_free(fftw_in[4]);
 		fftw_free(fftw_out[4]);
+
+		fftw_free(fftw_fast_in[3]);
+		fftw_free(fftw_fast_out[3]);
+		fftw_free(fftw_fast_in[4]);
+		fftw_free(fftw_fast_out[4]);
 	}
 
 	if (param->p->hfa3_fft_window_per_1s > 1) {
@@ -12222,11 +12756,19 @@ param->p->hfa3_max = 0;
 		fftw_free(fftw_out[5]);
 		fftw_free(fftw_in[6]);
 		fftw_free(fftw_out[6]);
-
 		fftw_free(fftw_in[7]);
 		fftw_free(fftw_out[7]);
 		fftw_free(fftw_in[8]);
 		fftw_free(fftw_out[8]);
+
+		fftw_free(fftw_fast_in[5]);
+		fftw_free(fftw_fast_out[5]);
+		fftw_free(fftw_fast_in[6]);
+		fftw_free(fftw_fast_out[6]);
+		fftw_free(fftw_fast_in[7]);
+		fftw_free(fftw_fast_out[7]);
+		fftw_free(fftw_fast_in[8]);
+		fftw_free(fftw_fast_out[8]);
 	}
 
 	fftw_free(fftw_in2);
@@ -12242,20 +12784,24 @@ param->p->hfa3_max = 0;
 // Function   : genOverToneSub
 // Description: 失われた高域の再現処理のサブ関数(倍音解析)
 // ---
-//	hfc		 	:高域のカットオフ周波数(この周波数以上の領域にデータを追加する)
-//	pIn			:入力バッファ
-//	pOut		:出力バッファ
-//	fftw_in		:FFTW 入力
-//	fftw_out	:FFTW 出力
-//	fftw_p		:FFTW プラン
-//	fftw_ip		:FFTW プラン
+//	hfc		 			:高域のカットオフ周波数(この周波数以上の領域にデータを追加する)
+//	pIn					:入力バッファ
+//	pOut				:出力バッファ
+//	arg_fftw_in			:FFTW 入力
+//	arg_fftw_out		:FFTW 出力
+//	arg_fftw_p			:FFTW プラン
+//	arg_fftw_ip			:FFTW プラン
+//	arg_fftw_fast_in	:FFTW 入力(fast)
+//	arg_fftw_fast_out	:FFTW 出力(fast)
+//	arg_fftw_fast_p		:FFTW プラン(fast)
+//	arg_fftw_fast_ip	:FFTW プラン(fast)
 //	ovInfo		:高域生成用構造体
 //	param		:変換パラメータ
 //
-void genOverToneSub(long hfc,SSIZE *pIn,SSIZE *pOut,fftw_complex *fftw_in,fftw_complex *fftw_out,fftw_plan fftw_p,fftw_plan fftw_ip,OVERTONE_INFO *ovInfo,PARAM_INFO *param,FFT_PARAM *fft_param)
+void genOverToneSub(long hfc,SSIZE *pIn,SSIZE *pOut,fftw_complex *arg_fftw_in,fftw_complex *arg_fftw_out,fftw_plan arg_fftw_p,fftw_plan arg_fftw_ip,fftw_complex *arg_fftw_fast_in,fftw_complex *arg_fftw_fast_out,fftw_plan arg_fftw_fast_p,fftw_plan arg_fftw_fast_ip,OVERTONE_INFO *ovInfo,PARAM_INFO *param,FFT_PARAM *fft_param)
 {
 	long outSampleR;
-	long fftSize,i,j,n,nn,idx;
+	long fftSize,fftFastSize,i,ii,j,n,nn,idx;
 	long lowIndex,highIndex,workIndex,workCount;
 	long sfa_width;
 	long sfa_hfc;
@@ -12265,6 +12811,8 @@ void genOverToneSub(long hfc,SSIZE *pIn,SSIZE *pOut,fftw_complex *fftw_in,fftw_c
 	double phaseTemp;
 	double from_avg_top10;
 	double to_avg_top10;
+	double thresh_diff_pw;
+	double adj_avg,adj_peak;
 	int    from_avg_top10_count;
 	int	   to_avg_top10_count;
 	int    hz;
@@ -12272,11 +12820,29 @@ void genOverToneSub(long hfc,SSIZE *pIn,SSIZE *pOut,fftw_complex *fftw_in,fftw_c
 	int d,d2;
 	int overToneNotFound;
 	int avg_peak_count;
+	fftw_complex *fftw_in,*fftw_out;
+	fftw_plan    fftw_p,fftw_ip;
 	static double sfa_test_pw[400];
 	static int    sfa_test_count[400];
 
 	outSampleR = param->p->outSampleR;
+	if (ovInfo->fast_index == -1) {
+		fftw_in   = arg_fftw_in;
+		fftw_out  = arg_fftw_out;
+		fftw_p    = arg_fftw_p;
+		fftw_ip   = arg_fftw_ip;
+		fftSize   = ovInfo->fftSize;
+	} else {
+		fftw_in   = arg_fftw_fast_in;
+		fftw_out  = arg_fftw_fast_out;
+		fftw_p    = arg_fftw_fast_p;
+		fftw_ip   = arg_fftw_fast_ip;
+		fftSize   = ovInfo->fftFastSize;
+		pIn       = &pIn[(fftSize * ovInfo->fast_index)];
+		pOut      = &pOut[(fftSize * ovInfo->fast_index)];
+	}
 
+#if 0
 	if (param->p->hfa3_version == 1) {
 		fftSize = 4096;
 	} else if (param->p->hfa3_version == 2) {
@@ -12339,7 +12905,6 @@ void genOverToneSub(long hfc,SSIZE *pIn,SSIZE *pOut,fftw_complex *fftw_in,fftw_c
 	}
 	// 1536000
 	if (outSampleR == 32000 * 48 || outSampleR == 44100 * 32 || outSampleR == 48000 * 32) {
-PRINT_LOG("","outSampleR 32");
 		if (param->p->hfa == 4) {
 			fftSize = outSampleR / 14;
 		} else if (param->p->hfa3_version == 1) {
@@ -12352,7 +12917,6 @@ PRINT_LOG("","outSampleR 32");
 	}
 	// 3072000
 	if (outSampleR == 32000 * 64 || outSampleR == 44100 * 64 || outSampleR == 48000 * 64) {
-PRINT_LOG("","outSampleR 64");
 		if (param->p->hfa == 4) {
 			fftSize = outSampleR / 14;
 		} else if (param->p->hfa3_version == 1) {
@@ -12366,10 +12930,7 @@ PRINT_LOG("","outSampleR 64");
 	if (param->p->hfa3_fft_window_size != 0) {
 		fftSize = outSampleR / param->p->hfa3_fft_window_size;
 	}
-//	if (param->p->hfa == 4) {
-// ☆
-//		fftSize = outSampleR / 32;
-//	}
+#endif
 
 	if (param->p->hfa3_version == 1) {
 		hfa_nx = (double)param->p->hfa_level_adjust_nx / 100.0;
@@ -12379,10 +12940,32 @@ PRINT_LOG("","outSampleR 64");
 		hfa_nx = (double)param->p->hfa_level_adjust_nx / 100.0;
 	}
 
-//fftSize = 4096;
+	// 初期設定
+	memset(ovInfo->pw_cnt,0,307200 * sizeof (int));
+	for (i = 0;i < 307200;i++) {
+		ovInfo->peak[i] = 0;
+	}
+	// 倍音解析
+	memset(ovInfo->power,0,307200 * sizeof (double));
+	memset(ovInfo->power_org,0,307200 * sizeof (double));
+	memset(ovInfo->phase,0,307200 * sizeof (double));
+	memset(ovInfo->pw,0,307200 * sizeof (double));
+	memset(ovInfo->avg,0,307200 * sizeof (double));
+	memset(ovInfo->diff,0,307200 * sizeof (double));
+	memset(ovInfo->base,0,307200 * sizeof (double));
+	memset(ovInfo->baseToAdj,0,307200 * sizeof (double));
+	memset(ovInfo->from_top10,0,10 * sizeof (double));
+	memset(ovInfo->to_top10,0,10 * sizeof (double));
+	memset(ovInfo->hfa4_coeff,0,307200 * sizeof (double));
+
+	// SFA用
+	memset(ovInfo->sfa_base,0,307200 * sizeof (double));
+	for (i = 0;i < 307200;i++) {
+		ovInfo->sfa_level[i] = 1;
+	}
+
 	// FFT 初期設定
 	copyToFFTW(fftw_in,pIn,fftSize);
-
 	// 窓関数
 	windowFFTW(fftw_in,fftSize);
 
@@ -12390,15 +12973,10 @@ PRINT_LOG("","outSampleR 64");
 	fftw_execute(fftw_p);
 
 	// 元信号の高域のパワーを調べる
-	memset(ovInfo->pw_cnt,0,307200 * sizeof (int));
 	refPw = 0;
 	lowIndex = ((double)fftSize / outSampleR) * (hfc - 2000);
 	highIndex = ((double)fftSize / outSampleR) * hfc;
 
-	for (i = 0;i < 307200;i++) {
-		ovInfo->peak[i] = 0;
-	}
-#if 1
 	for (i = lowIndex;i < highIndex;i++) {
 		p = fftw_out[i][0] * fftw_out[i][0] + fftw_out[i][1] * fftw_out[i][1];
 		if (p != 0) {
@@ -12428,41 +13006,6 @@ PRINT_LOG("","outSampleR 64");
 	refPw = fftw_out[nn][0] * fftw_out[nn][0] + fftw_out[nn][1] * fftw_out[nn][1];
 	if (refPw > 0) {
 		refPw = sqrt(refPw);
-	}
-#else
-	for (i = lowIndex,nn = 0;i < highIndex;i++,nn++) {
-		p = fftw_out[i][0] * fftw_out[i][0] + fftw_out[i][1] * fftw_out[i][1];
-		if (p != 0) {
-			p = sqrt(p);
-			p = log10(p) * 20;
-			p /= 3;
-		}
-		refPw += p;
-	}
-	if (nn > 0) {
-		refPw = refPw / nn;
-	}
-
-#endif
-
-	//
-	// 倍音解析
-	memset(ovInfo->power,0,307200 * sizeof (double));
-	memset(ovInfo->power_org,0,307200 * sizeof (double));
-	memset(ovInfo->phase,0,307200 * sizeof (double));
-	memset(ovInfo->pw,0,307200 * sizeof (double));
-	memset(ovInfo->avg,0,307200 * sizeof (double));
-	memset(ovInfo->diff,0,307200 * sizeof (double));
-	memset(ovInfo->base,0,307200 * sizeof (double));
-	memset(ovInfo->baseToAdj,0,307200 * sizeof (double));
-	memset(ovInfo->from_top10,0,10 * sizeof (double));
-	memset(ovInfo->to_top10,0,10 * sizeof (double));
-	memset(ovInfo->hfa4_coeff,0,307200 * sizeof (double));
-
-	// SFA用
-	memset(ovInfo->sfa_base,0,307200 * sizeof (double));
-	for (i = 0;i < 307200;i++) {
-		ovInfo->sfa_level[i] = 1;
 	}
 
 	// 元信号の音のパワーを調べる(0.8.4)
@@ -12566,42 +13109,6 @@ PRINT_LOG("","outSampleR 64");
 		ovInfo->power[i] = p;
 		ovInfo->power_org[i] = p;
 	}
-
-#if 0
-if (param->p->r1_flag && ovInfo->log) {
-	FILE *fp;
-	fp = fopen("d:\\fft_p.csv","a");
-	if (fp) {
-		fprintf(fp,"\n");
-		for (i = 1;i < fftSize / 2;i++) {
-			fprintf(fp,",%lf",ovInfo->power[i]);
-		}
-		fclose(fp);
-	}
-	fp = fopen("d:\\fft_h.csv","a");
-	if (fp) {
-		fprintf(fp,"\n");
-		for (i = 1;i < fftSize / 2;i++) {
-			fprintf(fp,",%lf",ovInfo->phase[i]);
-		}
-		fclose(fp);
-	}
-}
-#endif
-
-#if 0
-if (ovInfo->log) {
-	FILE *ofp;
-	ofp = fopen("d:\\fft.csv","a");
-	if (ofp) {
-		for (i = 300;i < 750;i++) {
-			fprintf(ofp,"%lf,",ovInfo->power[i]);
-		}
-		fprintf(ofp,"\n");
-		fclose(ofp);
-	}
-}
-#endif
 	if (param->p->hfa == 2) {
 		anaOverToneHFA2(ovInfo,param);
 	} else if (param->p->hfa == 3) {
@@ -12644,7 +13151,6 @@ if (ovInfo->log) {
 			}
 		}
 	}
-
 	overToneNotFound = 1;
 	for (i = 1;i < fftSize / 2;i++) {
 		if (ovInfo->pw[i] > 0) {
@@ -12726,7 +13232,6 @@ if (ovInfo->log) {
 			nx = ovInfo->from_avg / ovInfo->to_avg;
 			nx = nx * hfa_nx;
 			if (param->p->hfa3_param_test[0] == 0) {
-				PRINT_LOG("","hfa3_param_test[0] == 0");
 				for (i = 1;i < fftSize / 2;i++) {
 					fftw_out[i][0] *= nx;
 					fftw_out[i][1] *= nx;
@@ -12796,11 +13301,6 @@ if (ovInfo->log) {
 			} else {
 				to_avg_top10 = 0;
 			}
-			if (1) {
-				char sss[200];
-				sprintf(sss,"from_avg_top10:%lf,to_avg_top10:%lf",from_avg_top10,to_avg_top10);
-				PRINT_LOG(param->timecode,sss);
-			}
 			if (param->p->hfa3_sig_level_limit != 0 && param->p->hfa3_sig_level_limit < hfc && ((int)from_avg_top10 > 0 && (int)to_avg_top10 > 0) && from_avg_top10 < to_avg_top10) {
 				int nx_flag;
 				for (nx = 1.00;nx > 0.65;nx -= 0.05) {
@@ -12824,8 +13324,6 @@ if (ovInfo->log) {
 						fftw_out[i][0] *= nx;
 						fftw_out[i][1] *= nx;
 					}
-					sprintf(sss,"to_avg_top10:%lf",nx);
-					PRINT_LOG(param->timecode,sss);
 				}
 			}
 		}
@@ -12882,6 +13380,126 @@ if (ovInfo->log) {
 			highIndex = ((double)fftSize / outSampleR) * (outSampleR / 2);
 			for (;i < fftSize / 2;i++) {
 				ovInfo->sfa_level[i] = 0;
+			}
+		}
+
+		// 高域補間時のカットオフ周波数付近を調べる
+		lowIndex = ((double)fftSize / outSampleR) * hfc;
+		highIndex = ((double)fftSize / outSampleR) * (hfc + 1000);
+		adj_avg = 0;
+		adj_peak = 0;
+		avg_count = 0;
+		for (j = lowIndex;j < highIndex;j++) {
+			p2 = fftw_out[j][0] * fftw_out[j][0] + fftw_out[j][1] * fftw_out[j][1];
+			if (p2 != 0) {
+				p2 = sqrt(p2);
+				p2 = log10(p2) * 20;
+			}
+			adj_avg += p2;
+			avg_count++;
+		}
+		if (avg_count > 0) {
+			adj_avg /= avg_count;
+		}
+		for (j = lowIndex;j < highIndex;j++) {
+			p2 = fftw_out[j][0] * fftw_out[j][0] + fftw_out[j][1] * fftw_out[j][1];
+			if (p2 != 0) {
+				p2 = sqrt(p2);
+				p2 = log10(p2) * 20;
+			}
+			if (adj_peak < p2) {
+				adj_peak = p2;
+			}
+		}
+		if (adj_avg < adj_peak) {
+			if ((adj_peak - adj_avg) > DIFF_PW_CUT_THRESH) {
+				double nx = adj_avg / adj_peak;
+				for (j = lowIndex;j < highIndex;j++) {
+					p2 = fftw_out[j][0] * fftw_out[j][0] + fftw_out[j][1] * fftw_out[j][1];
+					if (p2 != 0) {
+						p2 = sqrt(p2);
+						p2 = log10(p2) * 20;
+					}
+					if (adj_avg + 20 < p2) {
+						fftw_out[j][0] = fftw_out[j][0] * nx;
+						fftw_out[j][1] = fftw_out[j][1] * nx;
+					}
+				}
+			}
+		}
+
+		// ナイキスト周波数付近のカットオフ周波数付近を調べる
+		lowIndex  = ((double)fftSize / outSampleR) * ((param->p->outSampleR_final / 2) - 1000);
+		highIndex  = ((double)fftSize / outSampleR) * ((param->p->outSampleR_final / 2) - 1);
+		adj_avg = 0;
+		adj_peak = 0;
+		avg_count = 0;
+		for (j = lowIndex;j < highIndex;j++) {
+			p2 = fftw_out[j][0] * fftw_out[j][0] + fftw_out[j][1] * fftw_out[j][1];
+			if (p2 != 0) {
+				p2 = sqrt(p2);
+				p2 = log10(p2) * 20;
+			}
+			adj_avg += p2;
+			avg_count++;
+		}
+		if (avg_count > 0) {
+			adj_avg /= avg_count;
+		}
+		for (j = lowIndex;j < highIndex;j++) {
+			p2 = fftw_out[j][0] * fftw_out[j][0] + fftw_out[j][1] * fftw_out[j][1];
+			if (p2 != 0) {
+				p2 = sqrt(p2);
+				p2 = log10(p2) * 20;
+			}
+			if (adj_peak < p2) {
+				adj_peak = p2;
+			}
+		}
+		if (adj_avg < adj_peak) {
+			if ((adj_peak - adj_avg) > DIFF_PW_CUT_THRESH) {
+				double nx = adj_avg / adj_peak;
+				for (j = lowIndex;j < highIndex;j++) {
+					p2 = fftw_out[j][0] * fftw_out[j][0] + fftw_out[j][1] * fftw_out[j][1];
+					if (p2 != 0) {
+						p2 = sqrt(p2);
+						p2 = log10(p2) * 20;
+					}
+					if (adj_avg + 20 < p2) {
+						fftw_out[j][0] = fftw_out[j][0] * nx;
+						fftw_out[j][1] = fftw_out[j][1] * nx;
+					}
+				}
+			}
+		}
+
+		// 高域補間時のカットオフ周波数付近のパワーを調べる
+		lowIndex = ((double)fftSize / outSampleR) * hfc;
+		highIndex = ((double)fftSize / outSampleR) * (hfc + 1000);
+		adj_avg = 0;
+		avg_count = 0;
+		for (j = lowIndex;j < highIndex;j++) {
+			p2 = fftw_out[j][0] * fftw_out[j][0] + fftw_out[j][1] * fftw_out[j][1];
+			if (p2 != 0) {
+				p2 = sqrt(p2);
+				p2 = log10(p2) * 20;
+			}
+			adj_avg += p2;
+			avg_count++;
+		}
+		if (avg_count > 0) {
+			adj_avg /= avg_count;
+		}
+		if (param->upconv == 2 && ovInfo->index == 1 && ovInfo->startInSample / outSampleR > 80) {
+			char sss[200];
+			sprintf(sss,"genOverTonePw: sec:%lld,%lf",ovInfo->startInSample / outSampleR,adj_avg);
+			PRINT_LOG("HFA4",sss);
+		}
+		if (adj_avg < 100) {
+			// 指定パワー以下はカットする
+			for (j = lowIndex;j < fftSize / 2;j++) {
+				fftw_out[j][0] = 0;
+				fftw_out[j][1] = 0;;
 			}
 		}
 
@@ -13052,13 +13670,15 @@ void anaOverToneHFA2(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 				}
 				avg = 0;
 				for (i = ofs,n = 0;i < highIndex;i += window) {
-					if (1 + window < i) {
-						if (ovInfo->power[i - window] <= ovInfo->power[i]) {
-							avg += ovInfo->power[i] - ovInfo->power[i - window];
-						} else {
-							avg += ovInfo->power[i] - ovInfo->power[i - window];
+					if (i >= window) {
+						if (1 + window < i) {
+							if (ovInfo->power[i - window] <= ovInfo->power[i]) {
+								avg += ovInfo->power[i] - ovInfo->power[i - window];
+							} else {
+								avg += ovInfo->power[i] - ovInfo->power[i - window];
+							}
+							n++;
 						}
-						n++;
 					}
 				}
 				if (n > 0) {
@@ -13367,12 +13987,16 @@ if (ovInfo->hfa3_log == 0) {
 					}
 					
 					// 前後のパワーの差の計算
-					if (i - window >= ofs) {
-						if (ovInfo->power[i - window] >= ovInfo->power[i]) {
-							diff = ovInfo->power[i - window] - ovInfo->power[i];
-						} else {
-							diff = ovInfo->power[i] - ovInfo->power[i - window];
+					if (i >= window) {
+						if (i - window >= ofs) {
+							if (ovInfo->power[i - window] >= ovInfo->power[i]) {
+								diff = ovInfo->power[i - window] - ovInfo->power[i];
+							} else {
+								diff = ovInfo->power[i] - ovInfo->power[i - window];
+							}
 						}
+					} else {
+						continue;
 					}
 					diffP += (diff * tbl_hfaDiffMin[param->hfaDiffMin - 1]);
 
@@ -13939,12 +14563,16 @@ if (ovInfo->hfa3_log == 0) {
 						}
 						
 						// 前後のパワーの差の計算
-						if (i - window >= ofs) {
-							if (ovInfo->power[i - window] >= ovInfo->power[i]) {
-								diff = ovInfo->power[i - window] - ovInfo->power[i];
-							} else {
-								diff = ovInfo->power[i] - ovInfo->power[i - window];
+						if (i >= window) {
+							if (i - window >= ofs) {
+								if (ovInfo->power[i - window] >= ovInfo->power[i]) {
+									diff = ovInfo->power[i - window] - ovInfo->power[i];
+								} else {
+									diff = ovInfo->power[i] - ovInfo->power[i - window];
+								}
 							}
+						} else {
+							continue;
 						}
 						diffP += (diff * tbl_hfaDiffMin[param->hfaDiffMin - 1]);
 
@@ -14452,12 +15080,15 @@ if (ovInfo->hfa3_log == 0) {
 							ovInfo->sign[baseOfs]--;
 						}
 
-						if (i - window >= ofs) {
-							if (ovInfo->power_ptr[i - window] < ovInfo->power_ptr[i]) {
-								avgPw /= 75;
+						if (i >= window) {
+							if (i - window >= ofs) {
+								if (ovInfo->power_ptr[i - window] < ovInfo->power_ptr[i]) {
+									avgPw /= 75;
+								}
 							}
+						} else {
+							continue;
 						}
-
 						if (refPw[0] == -1) {
 							refPw[0] = ovInfo->power_ptr[i] * hz;
 							max_i = i;
@@ -14590,12 +15221,15 @@ if (ovInfo->hfa3_log == 0) {
 							ovInfo->sign[baseOfs]--;
 						}
 
-						if (i - window >= ofs) {
-							if (ovInfo->power_ptr[i - window] < ovInfo->power_ptr[i]) {
-								avgPw /= 75;
+						if (i >= window) {
+							if (i - window >= ofs) {
+								if (ovInfo->power_ptr[i - window] < ovInfo->power_ptr[i]) {
+									avgPw /= 75;
+								}
 							}
+						} else {
+							continue;
 						}
-
 						if (refPw[0] == -1) {
 							refPw[0] = ovInfo->power_ptr[i] * hz;
 							max_i = i;
@@ -15036,12 +15670,16 @@ if (ovInfo->hfa3_log == 0) {
 						refPw[5] = ovInfo->power[i] * (odd * odd * odd);
 					}
 					// 前後のパワーの差の計算
-					if (i - window >= ofs) {
-						if (ovInfo->power[i - window] >= ovInfo->power[i]) {
-							diff = ovInfo->power[i - window] - ovInfo->power[i];
-						} else {
-							diff = ovInfo->power[i] - ovInfo->power[i - window];
+					if (i >= window) {
+						if (i - window >= ofs) {
+							if (ovInfo->power[i - window] >= ovInfo->power[i]) {
+								diff = ovInfo->power[i - window] - ovInfo->power[i];
+							} else {
+								diff = ovInfo->power[i] - ovInfo->power[i - window];
+							}
 						}
+					} else {
+						continue;
 					}
 					diffP += (diff * 1.48);
 
@@ -15389,12 +16027,16 @@ if (ovInfo->hfa3_log == 0) {
 					refPw[0] = ovInfo->phase[i];
 				}
 				// 前後の位相の差の計算
-				if (i - window >= ofs) {
-					if (refPw[0] <= ovInfo->phase[i]) {
-						diff = ovInfo->phase[i] - refPw[0];
-					} else {
-						diff = refPw[0] - ovInfo->phase[i];
+				if (i >= window) {
+					if (i - window >= ofs) {
+						if (refPw[0] <= ovInfo->phase[i]) {
+							diff = ovInfo->phase[i] - refPw[0];
+						} else {
+							diff = refPw[0] - ovInfo->phase[i];
+						}
 					}
+				} else {
+					continue;
 				}
 				diffP += diff;
 				nn++;
@@ -15925,12 +16567,16 @@ void anaOverToneHFA3(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 						refPw[5] = ovInfo->power[i] * (odd * odd * odd);
 					}
 					// 前後のパワーの差の計算
-					if (i - window >= ofs) {
-						if (ovInfo->power[i - window] >= ovInfo->power[i]) {
-							diff = ovInfo->power[i - window] - ovInfo->power[i];
-						} else {
-							diff = ovInfo->power[i] - ovInfo->power[i - window];
+					if (i >= window) {
+						if (i - window >= ofs) {
+							if (ovInfo->power[i - window] >= ovInfo->power[i]) {
+								diff = ovInfo->power[i - window] - ovInfo->power[i];
+							} else {
+								diff = ovInfo->power[i] - ovInfo->power[i - window];
+							}
 						}
+					} else {
+						continue;
 					}
 					diffP += diff;
 
@@ -16433,13 +17079,15 @@ void anaOverToneHFA3(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 						continue;
 					}
 
-
-					if (i - window >= ofs) {
-						if (ovInfo->power[i - window] < ovInfo->power[i]) {
-							avgPw /= 75;
+					if (i >= window) {
+						if (i - window >= ofs) {
+							if (ovInfo->power[i - window] < ovInfo->power[i]) {
+								avgPw /= 75;
+							}
 						}
+					} else {
+						continue;
 					}
-
 					if (refPw[0] == -1) {
 						refPw[0] = ovInfo->power[i] * hz;
 						max_i = i;
@@ -16955,6 +17603,28 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 	}
 	param->hfaDiffMin = 3;
 
+#if 0
+	// 補間の対象とするか否かを検証する
+	lowIndex  = ((double)ovInfo->nSample / (ovInfo->samplingRate / 2)) * 100;
+	highIndex = ((double)ovInfo->nSample / (ovInfo->samplingRate / 2)) * 5000;
+	avg = 0;
+	for (i = lowIndex,n = 0;i < highIndex;i++,n++) {
+		avg += ovInfo->power[i];
+	}
+	if (n > 0) {
+		avg /= n;
+	}
+	if (1) {
+		char sss[200];
+		sprintf(sss,"HFA4GenOverTonePw: sec:%lld,%lf",ovInfo->startInSample / ovInfo->samplingRate,avg);
+		PRINT_LOG("HFA4",sss);
+	}
+#endif
+	if (ovInfo->validSamplingRate < 6000) {
+		// 高域の情報がないので解析しない
+		return;
+	}
+
 	swidth = ((double)ovInfo->nSample / (ovInfo->samplingRate / 2)) * 1000;
 	ovInfo->power_ptr = ovInfo->power;
 	if (param->p->hfa3_version == 3) {
@@ -16973,7 +17643,6 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 			ovInfo->base[j] = avg;
 		}
 	}
-
 	if (ovInfo->validSamplingRate < 6000) {
 		// 高域の情報がないので解析しない
 		return;
@@ -17130,11 +17799,6 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 		db_shift = 20.0 * log10(pow(2, 56 - 24));
 	}
 
-	if (param->upconv == 1 && ovInfo->index == 1) {
-		sprintf(sss,"lowIndex:%d,highIndex:%d",lowIndex,highIndex);
-		PRINT_LOG("HFA4",sss);
-	}
-
 	// 相関が無いデータの補間(自然音など)
 	// 8kHz～12kHz
 	currentBox = ((double)ovInfo->nSample / (ovInfo->samplingRate / 2)) * 4000;
@@ -17169,10 +17833,10 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 		if (ovInfo->hfa4_lag[turningPointIndex - 1] < ovInfo->hfa4_lag[turningPointIndex] && turningPointIndex > minHz) break;
 	}
 
-	if (param->upconv == 1 && ovInfo->index == 1) {
-		sprintf(sss,"---- nSample:%d ----",ovInfo->nSample);
-		PRINT_LOG("HFA4",sss);
-	}
+//	if (param->upconv == 1 && ovInfo->index == 1) {
+//		sprintf(sss,"---- nSample:%d ----",ovInfo->nSample);
+//		PRINT_LOG("HFA4",sss);
+//	}
 
 #if 0
 	if (param->upconv == 1 && ovInfo->index == 1) {
@@ -17243,14 +17907,17 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 					} else if (ovInfo->power[j] < ovInfo->base[j]) {
 						ovInfo->sign[baseOfs]--;
 					}
-					
 					// 前後のパワーの差の計算
-					if (j - window >= ofs) {
-						if (ovInfo->power[j - window] >= ovInfo->power[j]) {
-							diff = ovInfo->power[j - window] - ovInfo->power[j];
-						} else {
-							diff = ovInfo->power[j] - ovInfo->power[j - window];
+					if (j > window) {
+						if (j - window >= ofs) {
+							if (ovInfo->power[j - window] >= ovInfo->power[j]) {
+								diff = ovInfo->power[j - window] - ovInfo->power[j];
+							} else {
+								diff = ovInfo->power[j] - ovInfo->power[j - window];
+							}
 						}
+					} else {
+						continue;
 					}
 					diffP += (diff * tbl_hfaDiffMin[param->hfaDiffMin - 1]);
 
@@ -17321,7 +17988,6 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 
 					nn++;
 				}
-
 				if (nn > 0) {
 					diff0 /= nn;
 					diff1 /= nn;
@@ -17372,9 +18038,7 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 					minType = 5;
 				}
 			}
-
 			// 一番予測誤差が少なかったものを採用する。
-
 			baseOfs = ofs - ((ofs / minWin) * minWin);
 			if (baseOfs == 0) {
 				baseOfs = minWin;
@@ -17696,6 +18360,7 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 			}
 		}
 	}
+
 #if 0
 	swidth = ((double)ovInfo->nSample / (ovInfo->samplingRate / 2)) * 500;
 	for (i = 1;i < ovInfo->nSample;i+= swidth) {
@@ -17831,12 +18496,16 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 					}
 					
 					// 前後のパワーの差の計算
-					if (j - window >= ofs) {
-						if (ovInfo->power[j - window] >= ovInfo->power[j]) {
-							diff = ovInfo->power[j - window] - ovInfo->power[j];
-						} else {
-							diff = ovInfo->power[j] - ovInfo->power[j - window];
+					if (j > window) {
+						if (j - window >= ofs) {
+							if (ovInfo->power[j - window] >= ovInfo->power[j]) {
+								diff = ovInfo->power[j - window] - ovInfo->power[j];
+							} else {
+								diff = ovInfo->power[j] - ovInfo->power[j - window];
+							}
 						}
+					} else {
+						continue;
 					}
 					diffP += (diff * tbl_hfaDiffMin[param->hfaDiffMin - 1]);
 
@@ -18286,7 +18955,6 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 		}
 	}
 #endif
-
 	// HFA3方式
 	lowHz	= 8000;
 	wid		= 3000;
@@ -18300,6 +18968,7 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 			lowHz = ovInfo->validSamplingRate - wid;
 		}
 	}
+#if 0
 	if (param->debug_print_disable == 0) {
 		char s[100];
 		sprintf(s,"hfa3_freq_start:%d",lowHz);
@@ -18310,7 +18979,7 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 		PRINT_LOG("",s);
 		param->debug_print_disable = 1;
 	}
-
+#endif
 	swidth	  = ((double)ovInfo->nSample / (ovInfo->samplingRate / 2)) * 190;
 	if (param->p->hfa3_version == 1) {
 		swidth	  = ((double)ovInfo->nSample / (ovInfo->samplingRate / 2)) * 177;
@@ -18463,12 +19132,16 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 					}
 					
 					// 前後のパワーの差の計算
-					if (i - window >= ofs) {
-						if (ovInfo->power[i - window] >= ovInfo->power[i]) {
-							diff = ovInfo->power[i - window] - ovInfo->power[i];
-						} else {
-							diff = ovInfo->power[i] - ovInfo->power[i - window];
+					if (i >= window) {
+						if (i - window >= ofs) {
+							if (ovInfo->power[i - window] >= ovInfo->power[i]) {
+								diff = ovInfo->power[i - window] - ovInfo->power[i];
+							} else {
+								diff = ovInfo->power[i] - ovInfo->power[i - window];
+							}
 						}
+					} else {
+						continue;
 					}
 					diffP += (diff * tbl_hfaDiffMin[param->hfaDiffMin - 1]);
 
@@ -18624,7 +19297,7 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 
 			if (param->hfa3_sig2_print_disable == 0) {
 				param->hfa3_sig2_print_disable = 1;
-				PRINT_LOG("","hfa3 sig2 output");
+//				PRINT_LOG("","hfa3 sig2 output");
 			}
 			for (i = baseOfs;i < nSample;i += minWin,n++,odd+=2) {
 				hz = ((ovInfo->samplingRate / 2) / (double)ovInfo->nSample) * i;
@@ -18925,6 +19598,7 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 				}
 			}
 			step	  = ((double)ovInfo->nSample / (ovInfo->samplingRate / 2)) * param->p->hfa3_analyze_step;	// 20191024
+#if 0
 			if (param->debug_print_disable == 0) {
 				char s[100];
 				sprintf(s,"2nd hfa3_freq_start:%d",lowHz);
@@ -18941,7 +19615,7 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 				}
 				param->debug_print_disable = 1;
 			}
-
+#endif
 			swidth	  = ((double)ovInfo->nSample / (ovInfo->samplingRate / 2)) * 177;
 			width	  = ((double)ovInfo->nSample / (ovInfo->samplingRate / 2)) * wid;
 			lowIndex  = ((double)ovInfo->nSample / (ovInfo->samplingRate / 2)) * lowHz;
@@ -18950,14 +19624,14 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 				char s[100];
 				sprintf(s,"validSampingRate:%d",ovInfo->validSamplingRate);
 				if (ovInfo->hfa3_log == 0) {
-					PRINT_LOG("",s);
+//					PRINT_LOG("",s);
 				}
 				highIndex = ((double)ovInfo->nSample / (ovInfo->samplingRate / 2)) * ovInfo->validSamplingRate;
 			} else {
 				char s[100];
 				sprintf(s,"validSampingRate:%d",ovInfo->validSamplingRate);
 				if (ovInfo->hfa3_log == 0) {
-					PRINT_LOG("",s);
+//					PRINT_LOG("",s);
 				}
 				highIndex = ((double)ovInfo->nSample / (ovInfo->samplingRate / 2)) * 16000;
 			}
@@ -18965,7 +19639,7 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 				char s[100];
 				sprintf(s,"hfa_analysis_limit:%d",param->p->hfa_analysis_limit);
 				if (ovInfo->hfa3_log == 0) {
-					PRINT_LOG("",s);
+//					PRINT_LOG("",s);
 				}
 				highIndex = ((double)ovInfo->nSample / (ovInfo->samplingRate / 2)) * param->p->hfa_analysis_limit;
 			}
@@ -19071,12 +19745,16 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 						}
 						
 						// 前後のパワーの差の計算
-						if (i - window >= ofs) {
-							if (ovInfo->power[i - window] >= ovInfo->power[i]) {
-								diff = ovInfo->power[i - window] - ovInfo->power[i];
-							} else {
-								diff = ovInfo->power[i] - ovInfo->power[i - window];
+						if (i >= window) {
+							if (i - window >= ofs) {
+								if (ovInfo->power[i - window] >= ovInfo->power[i]) {
+									diff = ovInfo->power[i - window] - ovInfo->power[i];
+								} else {
+									diff = ovInfo->power[i] - ovInfo->power[i - window];
+								}
 							}
+						} else {
+							continue;
 						}
 						diffP += (diff * tbl_hfaDiffMin[param->hfaDiffMin - 1]);
 
@@ -19545,6 +20223,18 @@ void anaOverToneHFA4(OVERTONE_INFO *ovInfo,PARAM_INFO *param)
 			}
 		}
 	}
+#if 0
+	for (i = baseOfs;i + 1< nSample;i++) {
+		hz = ((ovInfo->samplingRate / 2) / (double)ovInfo->nSample) * i;
+		if (hz < lowHz) {
+			continue;
+		}
+		if (ovInfo->pw[i] == 0) {
+			ovInfo->pw[i] = ovInfo->noise_pw[i];
+			ovInfo->phase[i] = 0 + (int)(rand() * (359 - 0 + 1.0) / (1.0 + RAND_MAX));
+		}
+	}
+#endif
 #if 1
 	lowIndex  = ((double)ovInfo->nSample / (ovInfo->samplingRate / 2)) * (ovInfo->validSamplingRate - 5000);
 	highIndex = ((double)ovInfo->nSample / (ovInfo->samplingRate / 2)) * (ovInfo->validSamplingRate - 1000);
@@ -21443,6 +22133,9 @@ void adjPinkFilter_0774(int mode,long fftSizeOut,fftw_complex *fftw_out2,PARAM_I
 
 	PRINT_FN_LOG(param->debug_upconv,"-adjPinkFilter_0774:Start");
 
+if (param->upconv == 2) {
+	PRINT_LOG("HFA4","22005");
+}
 	outSampleR = param->p->outSampleR;
 	if (mode == 4 && param->p->lpf != -1) {
 		startIdx = ((double)fftSizeOut / outSampleR) * param->p->lpf;
@@ -21481,7 +22174,9 @@ void adjPinkFilter_0774(int mode,long fftSizeOut,fftw_complex *fftw_out2,PARAM_I
 		}
 		return;
 	}
-
+if (param->upconv == 2) {
+	PRINT_LOG("HFA4","22046");
+}
 	if (mode == 1) {
 		// 1/f 特性にするフィルター(hfa1)
 		for (i = 1;i < fftSizeOut / 2;i++) {
@@ -21492,6 +22187,9 @@ void adjPinkFilter_0774(int mode,long fftSizeOut,fftw_complex *fftw_out2,PARAM_I
 			}
 		}
 	}
+if (param->upconv == 2) {
+	PRINT_LOG("HFA4","22059");
+}
 	if (mode != 3) {
 		// hfa1、hfa2、hfa3用の高域補間時の周波数調整
 		if (param->p->hfa != 0 && param->p->hfc >= 8000 && param->p->hfc <= 23000) {
@@ -21664,7 +22362,9 @@ void adjPinkFilter_0774(int mode,long fftSizeOut,fftw_complex *fftw_out2,PARAM_I
 			fftw_out2[i][1] *= div;
 		}
 	}
-
+if (param->upconv == 2) {
+	PRINT_LOG("HFA4","22234");
+}
 	if (param->p->oversamp == 0) {
 		for (i = (fftSizeOut / 2) - 5;i < fftSizeOut / 2;i++) {
 			fftw_out2[i][0] = 0;

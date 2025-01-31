@@ -10740,6 +10740,7 @@ static void fftFilter(int lr,SSIZE inSample,SSIZE outSample,FIO *fp_r,FIO *fp_w,
 	long wr;
 	long wkSampleR;
 	long pwCnt;
+	int f;
 	double percent,per;
 	double nx;
 	double *pwBase,basePw;
@@ -10931,6 +10932,7 @@ static void fftFilter(int lr,SSIZE inSample,SSIZE outSample,FIO *fp_r,FIO *fp_w,
 		pIn[2]	= &mem1[((fftSizeIn / 2) * 2)];
 		pOut[2] = &mem4[((fftSizeOut / 2) * 2)];
 
+#if 0
 		#pragma omp parallel
 		{
 			#pragma omp sections
@@ -10952,6 +10954,13 @@ static void fftFilter(int lr,SSIZE inSample,SSIZE outSample,FIO *fp_r,FIO *fp_w,
 				}
 			}
 		}
+#else
+		#pragma omp parallel for
+		for (f = 0;f < 3;f++) {
+			fftFilterSub(pIn[f],pOut[f],fftw_io[f],fftw_io[f],fftw_p[f],fftw_ip[f],param,f,p);
+		}
+
+#endif
 		if (param->w2r_dsf_mode != 1) {
 			memset(mem1,0,fftSizeOut * 2 * sizeof (SSIZE));
 			#pragma omp parallel for
@@ -11193,6 +11202,7 @@ static void LRC_fftFilter(SSIZE inSample1,SSIZE inSample2,FIO *fio1,FIO *fio2,FI
 	long pwCnt;
 	long hz;
 	long margin;
+	int f;
 	double percent,per;
 	double nx;
 	double *pwBase,basePw;
@@ -11555,6 +11565,7 @@ static void LRC_fftFilter(SSIZE inSample1,SSIZE inSample2,FIO *fio1,FIO *fio2,FI
 		memset(mem_c,0,wkMemSize * sizeof (SSIZE));
 
 		// Center
+#if 0
 		#pragma omp parallel
 		{
 			#pragma omp sections
@@ -11580,7 +11591,19 @@ static void LRC_fftFilter(SSIZE inSample1,SSIZE inSample2,FIO *fio1,FIO *fio2,FI
 				mem_c[i] = l_mem2[i] + l_mem3[i] + l_mem4[i];
 			}
 		}
+#else
+		#pragma omp for
+		for (f = 0;f < 3;f++) {
+			LRC_fftFilterSub(1,l_pIn[f],l_pOut[f],l_fftw_in[f],l_fftw_out[f],l_fftw_p[f],l_fftw_ip[f],r_pIn[f],r_pOut[f],r_fftw_in[f],r_fftw_out[f],r_fftw_p[f],r_fftw_ip[f],param,p,f);
+		}
 
+		#pragma omp for
+		for (i = 0;i < wkMemSize;i++) {
+			mem_c[i] = l_mem2[i] + l_mem3[i] + l_mem4[i];
+		}
+#endif
+
+#if 0
 		// Left
 		#pragma omp parallel
 		{
@@ -11607,7 +11630,20 @@ static void LRC_fftFilter(SSIZE inSample1,SSIZE inSample2,FIO *fio1,FIO *fio2,FI
 				mem_l[i] = l_mem2[i] + l_mem3[i] + l_mem4[i];
 			}
 		}
+#else
+		// Left
+		#pragma omp for
+		for (f = 0;f < 3;f++) {
+			LRC_fftFilterSub(2,l_pIn[f],l_pOut[f],l_fftw_in[f],l_fftw_out[f],l_fftw_p[f],l_fftw_ip[f],r_pIn[f],r_pOut[f],r_fftw_in[f],r_fftw_out[f],r_fftw_p[f],r_fftw_ip[f],param,p,f);
+		}
 
+		#pragma omp for
+		for (i = 0;i < wkMemSize;i++) {
+			mem_l[i] = l_mem2[i] + l_mem3[i] + l_mem4[i];
+		}
+#endif
+
+#if 0
 		// Right
 		#pragma omp parallel
 		{
@@ -11634,7 +11670,18 @@ static void LRC_fftFilter(SSIZE inSample1,SSIZE inSample2,FIO *fio1,FIO *fio2,FI
 				mem_r[i] = r_mem2[i] + r_mem3[i] + r_mem4[i];
 			}
 		}
+#else
+		// Right
+		#pragma omp for
+		for (f = 0;f < 3;f++) {
+			LRC_fftFilterSub(3,l_pIn[f],l_pOut[f],l_fftw_in[f],l_fftw_out[f],l_fftw_p[f],l_fftw_ip[f],r_pIn[f],r_pOut[f],r_fftw_in[f],r_fftw_out[f],r_fftw_p[f],r_fftw_ip[f],param,p,f);
+		}
 
+		#pragma omp for
+		for (i = 0;i < wkMemSize;i++) {
+			mem_r[i] = r_mem2[i] + r_mem3[i] + r_mem4[i];
+		}
+#endif
 		if (startInSample + fftSizeIn / 2 >= 0) {
 			if (outRemain >= fftSizeOut) {
 				wr = fio_write(mem_l + (fftSizeOut / 2),sizeof (SSIZE),fftSizeOut,fio_l);
@@ -12774,6 +12821,7 @@ void ms_process_1(SSIZE inSample,FIO *fp_r1,FIO *fp_r2,FIO *fp_w1,FIO *fp_w2,PAR
 	fftw_destroy_plan(fftw_ip);
 	fftw_free(fftw_in);
 	fftw_free(fftw_out);
+
 	free(mem1);
 	free(mem2);
 	free(mem3);
